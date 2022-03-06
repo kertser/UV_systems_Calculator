@@ -1,5 +1,5 @@
 """
-Calculator - Version 11.7.3 (23.06.2021)
+Calculator - Version 11.7.4 (23.06.2021)
 Modifications:
     - Fixed the minimum flow definition for RZB-300 (inside the SystemParameters file) from 150 to 10
     - Chlorine and ozone output precision set to 2 digits after zero
