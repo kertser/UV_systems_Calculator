@@ -1,0 +1,17 @@
+make new environment 
+pip install virtualenv
+virtualenv mypython
+mypthon\Scripts\activate
+
+from this environment install with the following packages:
+
+auto-py-to-exe
+numpy==1.19.3
+PyQt5
+xlrd (xlrd ver>2.0.0 takes only .xls files)
+pandas
+pyqtgraph
+pymongo
+dnspython
+
+opepyxl
