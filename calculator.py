@@ -1,8 +1,7 @@
 """
-Calculator - Version 11.7.4 (23.06.2021)
+Calculator - Version 11.7.5 (10.03.2022)
 Modifications:
-    - Fixed the minimum flow definition for RZB-300 (inside the SystemParameters file) from 150 to 10
-    - Chlorine and ozone output precision set to 2 digits after zero
+    - Fixed pressure drop for RZ-300-XX
 """
 from PyQt5 import uic, QtWidgets, QtCore
 from PyQt5.QtWidgets import QTableWidgetItem, QTableWidget
