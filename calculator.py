@@ -1,7 +1,7 @@
 """
-Calculator - Version 11.7.5 (10.03.2022)
+Calculator - Version 11.9 (13.03.2022)
 Modifications:
-    - Fixed pressure drop for RZ-300-XX
+    - Added the hidden D1-Log in Marketing version
 """
 from PyQt5 import uic, QtWidgets, QtCore
 from PyQt5.QtWidgets import QTableWidgetItem, QTableWidget
@@ -80,7 +80,7 @@ class Login(QtWidgets.QDialog):
 class Ui(QtWidgets.QDialog):
     def __init__(self):
         super(Ui, self).__init__()
-        uic_path = resource_path("Calculator_v11a10.ui")        
+        uic_path = resource_path("Calculator_UI.ui")
         uic.loadUi(uic_path, self)
        
         # Connect the radio buttons       
@@ -124,6 +124,10 @@ class Ui(QtWidgets.QDialog):
         self.UVT215.setVisible(False)
         self.UVT215units.setVisible(False)
         self.UVT215Label.setVisible(False)
+
+        # Hide D1Log in Marketing Version
+        self.D1Log.setEnabled(False)
+        self.Pathogens_Table.setEnabled(False)
         
         self.ge1 = QtWidgets.QGraphicsBlurEffect()        
         self.UVT215Label.setGraphicsEffect(self.ge1)        
@@ -1166,6 +1170,10 @@ def Developer():
                 window.PlotRedUVT.setEnabled(True)
                 window.PlotRedFlow.setEnabled(True)
                 window.PlotRedPower.setEnabled(True)
+
+                window.D1Log.setEnabled(True)
+                #window.D1Log.setVisible(True)
+                window.Pathogens_Table.setEnabled(True)
                 
                 #window.UVT215.setVisible(True)
                 #window.UVT215units.setVisible(True)
@@ -1185,6 +1193,10 @@ def Marketing():
         window.PlotRedUVT.setEnabled(False)
         window.PlotRedFlow.setEnabled(False)
         window.PlotRedPower.setEnabled(False)
+
+        window.D1Log.setEnabled(False)
+        #window.D1Log.setVisible(False)
+        window.Pathogens_Table.setEnabled(False)
         
         window.UVT215.setVisible(False)
         window.UVT215units.setVisible(False)
