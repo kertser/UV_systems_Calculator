@@ -13,7 +13,7 @@ from math import exp as exp
 # Davg(P,Q,UVT)=Z1*((P^α)/(Q^β))*EXP(γ*(UVT/100))
 
 # Dose Coefficents
-VF = 1.4 #Validation Factor
+VF = 1.3 #Validation Factor
 
 Z1 = 0.060339841231047
 alfa = 1
