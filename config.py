@@ -87,20 +87,29 @@ Lamp_Modules = {
     'DL'  : 2,
     'x2'  : 2,
     'x4'  : 4,
+    '5/5' : 5,
+    '3/5' : 3,
+    '2/5' : 2,
+    '8/8' : 8,
+    '5/8' : 5,
+    '11/11':11,
+    '7/11' :7
     }
+
+# In RZM models, the module is single, but for the formal matter the "lamps in single module" will be = 1
 
 lamps_in_single_Module = {
     'RZB-300'        : 2,
-    'RZM-200'        : 5,
-    'RZM-350'        : 8,
-    'RZM-350-Marine' : 8,
-    'RZM-500'        : 11
+    'RZM-200'        : 1,
+    'RZM-350'        : 1,
+    'RZM-350-Marine' : 1,
+    'RZMW-350'        : 1
     }
 
 Modules = ['11','12','13','14'] #Just for the initial value per RZ-163
 
 ValidatedDoseFamilies = ['RZ-163','RZ-163-HP','RZ-163-UHP','RS-104','RZ-104','RZ-300',
-                         'RZB-300','EP-600','RZM-350','RZM-350-Marine','RZM-200','R-200']
+                         'RZB-300','EP-600','RZM-350','RZM-350-Marine','RZMW-350','RZM-200','R-200']
 MunicipalFamilies = ['RZ-163','RZ-104','RZ-300','R-200']
 DairyFamilies = ['RZ-163','RZ-163-HP','RZ-104','RZ-300','RZB-300','R-200']
 

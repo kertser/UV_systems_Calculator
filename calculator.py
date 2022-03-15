@@ -558,9 +558,19 @@ def recalculate():
         window.AveragePowerConsumption.setAlignment(QtCore.Qt.AlignCenter)
         
     if window.UVSystem.currentText() == 'RZM-200':
-        from RZM_200 import RED as RED
-        from RZM_200 import HeadLoss as HL
-        from RZM_200 import LampPower as LampPower
+        
+        if ((window.UVModel.currentText() == '5/5')): #5 out of 5 lamps per branch
+            from RZM_200_5 import RED as RED
+            from RZM_200_5 import HeadLoss as HL
+            from RZM_200_5 import LampPower as LampPower
+        elif ((window.UVModel.currentText() == '3/5')): #3 out of 5 lamps per branch
+            from RZM_200_3 import RED as RED
+            from RZM_200_3 import HeadLoss as HL
+            from RZM_200_3 import LampPower as LampPower
+        elif ((window.UVModel.currentText() == '2/5')): #2 out of 5 lamps per branch
+            from RZM_200_2 import RED as RED
+            from RZM_200_2 import HeadLoss as HL
+            from RZM_200_2 import LampPower as LampPower
         
         #from RZM_200 import minFlow as minFlow
         #from RZM_200 import maxFlow as maxFlow
@@ -581,7 +591,57 @@ def recalculate():
         
         config.MaxLampsPower = LampPower * config.NLamps
         config.AveragePowerConsumption = int(config.MaxLampsPower*(config.Drive/100)*0.9)
-        window.MaxLampsPower.setText(str(config.MaxLampsPower/1000))
+        window.MaxLampsPower.setText(str(round(config.MaxLampsPower/1000,1)))
+        window.MaxLampsPower.setAlignment(QtCore.Qt.AlignCenter)
+        window.AveragePowerConsumption.setText(str(config.AveragePowerConsumption/1000))
+        window.AveragePowerConsumption.setAlignment(QtCore.Qt.AlignCenter)
+
+
+    if window.UVSystem.currentText() == 'RZMW-350':
+        
+        if ((window.UVModel.currentText() == '11/11')): #11 out of 11 lamps per branch
+            from RZMW_350_11 import RED as RED
+            from RZMW_350_11 import HeadLoss as HL
+            from RZMW_350_11 import LampPower as LampPower
+        elif ((window.UVModel.currentText() == '7/11')): #7 out of 11 lamps per branch
+            from RZMW_350_7 import RED as RED
+            from RZMW_350_7 import HeadLoss as HL
+            from RZMW_350_7 import LampPower as LampPower
+        
+        #from RZM_200 import minFlow as minFlow
+        #from RZM_200 import maxFlow as maxFlow
+        
+        #config.minFlow = minFlow
+        #config.maxFlow = maxFlow
+        
+        # Calculate RED and HeadLoss
+        
+        if ((window.UVModel.currentText() == '11/11')): #11 out of 11 lamps per branch:
+            window.RED.setText(str(round(RED(config.Drive,config.Drive,config.Drive,config.Drive,config.Drive,
+                                             config.Drive,config.Drive,config.Drive,config.Drive,config.Drive,
+                                             config.Drive,
+                                             config.LampEfficiency,config.LampEfficiency,config.LampEfficiency,
+                                             config.LampEfficiency,config.LampEfficiency,config.LampEfficiency,
+                                             config.LampEfficiency,config.LampEfficiency,config.LampEfficiency,
+                                             config.LampEfficiency,config.LampEfficiency,
+                                             config.FlowRate_m3h/config.nBranches,config.UVT,config.D1Log,config.NLamps),1)))
+        elif ((window.UVModel.currentText() == '7/11')): #7 out of 11 lamps per branch:
+            window.RED.setText(str(round(RED(config.Drive,config.Drive,config.Drive,config.Drive,config.Drive,
+                                             config.Drive,config.Drive,
+                                             config.LampEfficiency,config.LampEfficiency,config.LampEfficiency,
+                                             config.LampEfficiency,config.LampEfficiency,config.LampEfficiency,
+                                             config.LampEfficiency,config.FlowRate_m3h/config.nBranches,
+                                             config.UVT,config.D1Log,config.NLamps),1)))
+        
+        if (float(window.RED.toPlainText())<0):
+            window.RED.setText('0')
+        window.RED.setAlignment(QtCore.Qt.AlignCenter)
+        window.HeadLoss.setText(str(HL(config.FlowRate_m3h/config.nBranches,config.NLamps)))
+        window.HeadLoss.setAlignment(QtCore.Qt.AlignCenter)
+        
+        config.MaxLampsPower = LampPower * config.NLamps
+        config.AveragePowerConsumption = int(config.MaxLampsPower*(config.Drive/100)*0.9)
+        window.MaxLampsPower.setText(str(round(config.MaxLampsPower/1000,1)))
         window.MaxLampsPower.setAlignment(QtCore.Qt.AlignCenter)
         window.AveragePowerConsumption.setText(str(config.AveragePowerConsumption/1000))
         window.AveragePowerConsumption.setAlignment(QtCore.Qt.AlignCenter)
@@ -615,10 +675,17 @@ def recalculate():
         
     if (window.UVSystem.currentText() == 'RZM-350') | (window.UVSystem.currentText() == 'RZM-350-Marine'):
         #implement RZM model
-        from RZM_350 import RED as RED
-        from RZM_350 import HeadLoss as HL
-        from RZM_350 import LampPower as LampPower
-        from RZM_350 import Dose_VF as VF #Validation Factor
+        
+        if ((window.UVModel.currentText() == '8/8')): #8 out of 8 lamps per branch
+            from RZM_350_8 import RED as RED
+            from RZM_350_8 import HeadLoss as HL
+            from RZM_350_8 import LampPower as LampPower
+            from RZM_350_8 import Dose_VF as VF #Validation Factor
+        elif ((window.UVModel.currentText() == '5/8')): #5 out of 8 lamps per branch
+            from RZM_350_5 import RED as RED
+            from RZM_350_5 import HeadLoss as HL
+            from RZM_350_5 import LampPower as LampPower
+            from RZM_350_5 import Dose_VF as VF #Validation Factor
         
         #from RZM_350 import minFlow as minFlow
         #from RZM_350 import maxFlow as maxFlow
