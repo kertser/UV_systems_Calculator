@@ -56,9 +56,9 @@ OzoneD_05 = 50 #[mJ/cm^2]
 ChlorineD_05 = 310#[mJ/cm^2]
 
 # Default Parameters (they are actual parameters for RZ-163-11)
-minFlow = 4 # Minimum Flow Rate in m3h
+minFlow = 30 # Minimum Flow Rate in m3h
 minFlowgpm = round(minFlow*m3h2gpm,1) # same in gpm
-maxFlow = 2000 # Maximum Flow Rate in m3h
+maxFlow = 360 # Maximum Flow Rate in m3h
 maxFlowgpm = round(maxFlow*m3h2gpm,1) # same in gpm
 minUVT = 25 # minimum UVT245 in %-1cm
 maxUVT = 99 # maximum UVT245 in %-1cm

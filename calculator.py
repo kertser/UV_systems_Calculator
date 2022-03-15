@@ -899,7 +899,7 @@ def PlotREDvsFlow():
     title = "RED vs. Flow"
     y1,y2,y3 = [],[],[]
     
-    UV_range = range(config.minFlow, config.maxFlow, 10)
+    UV_range = range(int(config.minFlow), int(config.maxFlow), 10)
     
     # Remember all the values
     rememberLampEfficiency = float(window.LampEfficiency.text()) # Store Eff
