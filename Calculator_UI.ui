@@ -1013,7 +1013,7 @@ p, li { white-space: pre-wrap; }
       <rect>
        <x>10</x>
        <y>20</y>
-       <width>61</width>
+       <width>51</width>
        <height>24</height>
       </rect>
      </property>
@@ -1060,7 +1060,7 @@ p, li { white-space: pre-wrap; }
       <rect>
        <x>10</x>
        <y>50</y>
-       <width>61</width>
+       <width>51</width>
        <height>24</height>
       </rect>
      </property>
@@ -1096,9 +1096,9 @@ p, li { white-space: pre-wrap; }
     <widget class="QComboBox" name="UVSystem">
      <property name="geometry">
       <rect>
-       <x>80</x>
+       <x>70</x>
        <y>20</y>
-       <width>131</width>
+       <width>141</width>
        <height>24</height>
       </rect>
      </property>
@@ -1106,9 +1106,9 @@ p, li { white-space: pre-wrap; }
     <widget class="QComboBox" name="UVModel">
      <property name="geometry">
       <rect>
-       <x>80</x>
+       <x>70</x>
        <y>50</y>
-       <width>61</width>
+       <width>71</width>
        <height>24</height>
       </rect>
      </property>
@@ -1121,7 +1121,7 @@ p, li { white-space: pre-wrap; }
       <rect>
        <x>10</x>
        <y>80</y>
-       <width>61</width>
+       <width>51</width>
        <height>24</height>
       </rect>
      </property>
@@ -1157,9 +1157,9 @@ p, li { white-space: pre-wrap; }
     <widget class="QLineEdit" name="UVBranches">
      <property name="geometry">
       <rect>
-       <x>80</x>
+       <x>70</x>
        <y>80</y>
-       <width>61</width>
+       <width>71</width>
        <height>24</height>
       </rect>
      </property>
@@ -1229,7 +1229,7 @@ p, li { white-space: pre-wrap; }
        <x>153</x>
        <y>54</y>
        <width>61</width>
-       <height>17</height>
+       <height>20</height>
       </rect>
      </property>
      <property name="text">
