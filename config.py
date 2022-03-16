@@ -87,13 +87,13 @@ Lamp_Modules = {
     'DL'  : 2,
     'x2'  : 2,
     'x4'  : 4,
-    '5/5' : 5,
-    '3/5' : 3,
-    '2/5' : 2,
-    '8/8' : 8,
-    '5/8' : 5,
-    '11/11':11,
-    '7/11' :7
+    '5 Lamps' : 5, #5/5
+    '3 Lamps' : 3, #3/5
+    '2 Lamps' : 2, #2/5
+    '8 Lamps' : 8, #8/8
+    '5 Lamps' : 5, #5/8
+    '11 Lamps':11, #11/11
+    '7 Lamps' :7 #7/11
     }
 
 # In RZM models, the module is single, but for the formal matter the "lamps in single module" will be = 1

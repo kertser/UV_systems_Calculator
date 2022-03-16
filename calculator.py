@@ -559,15 +559,15 @@ def recalculate():
         
     if window.UVSystem.currentText() == 'RZM-200':
         
-        if ((window.UVModel.currentText() == '5/5')): #5 out of 5 lamps per branch
+        if ((window.UVModel.currentText() == '5 Lamps')): #5 out of 5 lamps per branch
             from RZM_200_5 import RED as RED
             from RZM_200_5 import HeadLoss as HL
             from RZM_200_5 import LampPower as LampPower
-        elif ((window.UVModel.currentText() == '3/5')): #3 out of 5 lamps per branch
+        elif ((window.UVModel.currentText() == '3 Lamps')): #3 out of 5 lamps per branch
             from RZM_200_3 import RED as RED
             from RZM_200_3 import HeadLoss as HL
             from RZM_200_3 import LampPower as LampPower
-        elif ((window.UVModel.currentText() == '2/5')): #2 out of 5 lamps per branch
+        elif ((window.UVModel.currentText() == '2 Lamps')): #2 out of 5 lamps per branch
             from RZM_200_2 import RED as RED
             from RZM_200_2 import HeadLoss as HL
             from RZM_200_2 import LampPower as LampPower
@@ -599,11 +599,11 @@ def recalculate():
 
     if window.UVSystem.currentText() == 'RZMW-350':
         
-        if ((window.UVModel.currentText() == '11/11')): #11 out of 11 lamps per branch
+        if ((window.UVModel.currentText() == '11 Lamps')): #11 out of 11 lamps per branch
             from RZMW_350_11 import RED as RED
             from RZMW_350_11 import HeadLoss as HL
             from RZMW_350_11 import LampPower as LampPower
-        elif ((window.UVModel.currentText() == '7/11')): #7 out of 11 lamps per branch
+        elif ((window.UVModel.currentText() == '7 Lamps')): #7 out of 11 lamps per branch
             from RZMW_350_7 import RED as RED
             from RZMW_350_7 import HeadLoss as HL
             from RZMW_350_7 import LampPower as LampPower
@@ -616,7 +616,7 @@ def recalculate():
         
         # Calculate RED and HeadLoss
         
-        if ((window.UVModel.currentText() == '11/11')): #11 out of 11 lamps per branch:
+        if ((window.UVModel.currentText() == '11 Lamps')): #11 out of 11 lamps per branch:
             window.RED.setText(str(round(RED(config.Drive,config.Drive,config.Drive,config.Drive,config.Drive,
                                              config.Drive,config.Drive,config.Drive,config.Drive,config.Drive,
                                              config.Drive,
@@ -625,7 +625,7 @@ def recalculate():
                                              config.LampEfficiency,config.LampEfficiency,config.LampEfficiency,
                                              config.LampEfficiency,config.LampEfficiency,
                                              config.FlowRate_m3h/config.nBranches,config.UVT,config.D1Log,config.NLamps),1)))
-        elif ((window.UVModel.currentText() == '7/11')): #7 out of 11 lamps per branch:
+        elif ((window.UVModel.currentText() == '7 Lamps')): #7 out of 11 lamps per branch:
             window.RED.setText(str(round(RED(config.Drive,config.Drive,config.Drive,config.Drive,config.Drive,
                                              config.Drive,config.Drive,
                                              config.LampEfficiency,config.LampEfficiency,config.LampEfficiency,
@@ -676,12 +676,12 @@ def recalculate():
     if (window.UVSystem.currentText() == 'RZM-350') | (window.UVSystem.currentText() == 'RZM-350-Marine'):
         #implement RZM model
         
-        if ((window.UVModel.currentText() == '8/8')): #8 out of 8 lamps per branch
+        if ((window.UVModel.currentText() == '8 Lamps')): #8 out of 8 lamps per branch
             from RZM_350_8 import RED as RED
             from RZM_350_8 import HeadLoss as HL
             from RZM_350_8 import LampPower as LampPower
             from RZM_350_8 import Dose_VF as VF #Validation Factor
-        elif ((window.UVModel.currentText() == '5/8')): #5 out of 8 lamps per branch
+        elif ((window.UVModel.currentText() == '5 Lamps')): #5 out of 8 lamps per branch
             from RZM_350_5 import RED as RED
             from RZM_350_5 import HeadLoss as HL
             from RZM_350_5 import LampPower as LampPower
