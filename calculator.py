@@ -1,6 +1,6 @@
 #%%
 """
-Calculator - Version 11.9 (13.03.2022)
+Calculator - Version 11.11 (04.04.2022)
 Modifications:
     - Added the hidden D1-Log in Marketing version
 """
@@ -128,6 +128,11 @@ class Ui(QtWidgets.QDialog):
         #self.UVT215.setTextInteractionFlags(QtCore.Qt.NoTextInteraction)
         self.UVT215.setAlignment(QtCore.Qt.AlignCenter)
         #self.UVT.textChanged.connect(UVT215)
+        
+        # Disable EPA/PMO and Dechlorination in Marketing version
+        self.EPA.setEnabled(False)
+        self.PMO.setEnabled(False)
+        self.Dechlorination.setEnabled(False)
 
         # Hide UVT215 and Graphs in Marketing version
         self.UVT215.setVisible(False)
@@ -229,6 +234,11 @@ class Ui(QtWidgets.QDialog):
             self.ge1.setEnabled(False)
             self.ge2.setEnabled(False)
             self.ge3.setEnabled(False)
+            
+            # Enable EPA/PMO and Dechlorination in Developer version
+            self.EPA.setEnabled(True)
+            self.PMO.setEnabled(True)
+            self.Dechlorination.setEnabled(True)
             
 
 #%% Data table load - pathogens
@@ -1274,8 +1284,13 @@ def Developer():
                 window.ge1.setEnabled(False)
                 window.ge2.setEnabled(False)
                 window.ge3.setEnabled(False)
+                
+                window.EPA.setEnabled(True)
+                window.PMO.setEnabled(True)
+                window.Dechlorination.setEnabled(True)
 
                 config.CalculatorType = 'Developer'
+                UVModel()
 
 def Marketing():
     if (config.CalculatorType == 'Developer'):
@@ -1299,9 +1314,16 @@ def Marketing():
         window.UVT215.setVisible(True)
         window.UVT215units.setVisible(True)
         window.UVT215Label.setVisible(True)
-
+        
+        
+        window.EPA.setEnabled(False)
+        window.PMO.setEnabled(False)
+        window.Dechlorination.setEnabled(False)
+        window.FullRangeRED.setChecked(True)
+        FullRanged()
 
         config.CalculatorType = 'Marketing'
+        UVModel()
 
 def FullTable():
 
@@ -1509,10 +1531,13 @@ def UVModel():
 
     params = config.SystemParameters.loc[(config.SystemParameters['UV-System']==window.UVSystem.currentText()) & (config.SystemParameters['Model']==window.UVModel.currentText())]
 
-    if window.vertical.isChecked():
-        config.minFlow = (round(float(params['Qmin vertical [m^3/h]']),0)) # Vertical
+    if config.CalculatorType == 'Developer' or config.CalculatorType == 'Admin':
+        config.minFlow = 1 #This is an absolute minimum
     else:
-        config.minFlow = (round(float(params['Qmin [m^3/h]']),0)) # Horizontal
+        if window.vertical.isChecked():
+            config.minFlow = (round(float(params['Qmin vertical [m^3/h]']),0)) # Vertical
+        else:
+            config.minFlow = (round(float(params['Qmin [m^3/h]']),0)) # Horizontal
     config.maxFlow = (round(float(params['Qmax [m^3/h]']),0))
 
     #Beanches flow dividers
@@ -1701,6 +1726,17 @@ def FlowRate():
         #if (float(window.FlowRate.text()) >= config.minFlow) & (float(window.FlowRate.text()) <= config.maxFlow):
         window.FlowRate.setStyleSheet("background-color: rgb(255, 255, 255);")
 
+        params = config.SystemParameters.loc[(config.SystemParameters['UV-System']==window.UVSystem.currentText()) & (config.SystemParameters['Model']==window.UVModel.currentText())]
+        if window.vertical.isChecked():
+            TempMinFlow = (round(float(params['Qmin vertical [m^3/h]']),0)) # Vertical
+        else:
+            TempMinFlow = (round(float(params['Qmin [m^3/h]']),0)) # Horizontal
+        if  config.FlowRate_m3h<TempMinFlow:
+            window.FlowRate.setStyleSheet("background-color: rgb(255, 0, 0);")
+            window.RED.setStyleSheet("background-color: rgb(255, 0, 0);")
+        else:
+            window.RED.setStyleSheet("background-color: rgb(255, 255, 255);")
+
         if ((config.FlowUnits == 'm3h') & (float(window.FlowRate.text()) >= (config.minFlow)) & (float(window.FlowRate.text()) <= (config.maxFlow))):
             config.FlowRate_m3h = float(window.FlowRate.text())
             config.FlowRate_USgpm = round(config.FlowRate_m3h * config.m3h2gpm,1) #unit conversion
@@ -1785,22 +1821,26 @@ def FlowForDose():
                 Flow1 = Flow
 
 def resetCalc(self):
-    import imp
 
-    imp.reload(config)
-
-    window.LampEfficiency.setText(str(config.LampEfficiency))
+    window.LampEfficiency.setText(str(80))
     window.LampEfficiency.setAlignment(QtCore.Qt.AlignCenter)
-    window.Power.setText(str(config.Drive))
+    window.Power.setText(str(100))
     window.Power.setAlignment(QtCore.Qt.AlignCenter)
-    window.UVT.setText(str(config.UVT))
+    window.UVT.setText(str(95))
     window.UVT.setAlignment(QtCore.Qt.AlignCenter)
     window.UVT215.setText(str(config.UVT215))
     window.UVT215.setAlignment(QtCore.Qt.AlignCenter)
-    window.FlowRate.setText(str(config.FlowRate_m3h))
+    
+    if config.minFlow<100:
+        window.FlowRate.setText(str(100))
+    else:
+        window.FlowRate.setText(str(config.minFlow))
     window.FlowRate.setAlignment(QtCore.Qt.AlignCenter)
+    
     config.FlowUnits = 'm3h'
     window.FlowUnits.setCurrentIndex(0) #set to m3/h
+
+
     FlowUnits()
     recalculate()
 

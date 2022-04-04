@@ -72,7 +72,7 @@
    <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
-      <x>800</x>
+      <x>790</x>
       <y>0</y>
       <width>211</width>
       <height>41</height>
@@ -90,7 +90,7 @@
      </font>
     </property>
     <property name="text">
-     <string>UV Dose Calculator v.11.10</string>
+     <string>UV Dose Calculator v.11.11</string>
     </property>
     <property name="textFormat">
      <enum>Qt::RichText</enum>
@@ -2171,7 +2171,7 @@ p, li { white-space: pre-wrap; }
     <property name="alignment">
      <set>Qt::AlignCenter</set>
     </property>
-    <widget class="QTextBrowser" name="textBrowser_24">
+    <widget class="QTextBrowser" name="chlorineInLabel">
      <property name="enabled">
       <bool>false</bool>
      </property>
@@ -2352,7 +2352,7 @@ p, li { white-space: pre-wrap; }
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Ozone-In [ppm]&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
     </widget>
-    <widget class="QTextBrowser" name="textBrowser_26">
+    <widget class="QTextBrowser" name="chlorineOutLabel">
      <property name="enabled">
       <bool>false</bool>
      </property>
@@ -2449,14 +2449,14 @@ p, li { white-space: pre-wrap; }
    <widget class="QLabel" name="label_3">
     <property name="geometry">
      <rect>
-      <x>820</x>
+      <x>790</x>
       <y>10</y>
-      <width>201</width>
-      <height>16</height>
+      <width>231</width>
+      <height>20</height>
      </rect>
     </property>
     <property name="text">
-     <string>Copyright: Atlantium Technologies 2020</string>
+     <string>Copyright: Atlantium Technologies 2020-2022</string>
     </property>
    </widget>
   </widget>
