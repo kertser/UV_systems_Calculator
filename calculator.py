@@ -221,6 +221,7 @@ class Ui(QtWidgets.QDialog):
         self.FlowSlider.valueChanged.connect(FlowSlider)
 
         self.setFixedSize(self.size())
+        
 
         if config.CalculatorType == 'Developer':
             self.PlotRedUVT.setEnabled(True)
@@ -290,10 +291,10 @@ class Ui(QtWidgets.QDialog):
 
 #%% End of constructed elements
 
-    def keyPressEvent(self, qKeyEvent):
+    def keyPressEvent(self, qKeyEvent): #Reacts to Enter button
         #print(qKeyEvent.key())
         if (qKeyEvent.key() == QtCore.Qt.Key_Return) | (qKeyEvent.key() == QtCore.Qt.Key_Enter):
-            UVSystem()
+            #UVSystem()
             recalculate
         else:
             super().keyPressEvent(qKeyEvent)
