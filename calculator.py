@@ -1746,6 +1746,7 @@ def FlowRate():
             window.FlowSlider.setMinimum(int(round(config.minFlow,1)))
             window.FlowSlider.setMaximum(int(round(config.maxFlow,1)))
             window.FlowSlider.blockSignals(False)
+            window.FlowRate.setStyleSheet("background-color: rgb(255, 255, 255);")
             ValidInput = True
             recalculate()
         elif ((config.FlowUnits == 'gpm') & (float(window.FlowRate.text()) >= (config.minFlowgpm)) & (float(window.FlowRate.text()) <= (config.maxFlowgpm))): #USgpm units
@@ -1756,6 +1757,7 @@ def FlowRate():
             window.FlowSlider.setMinimum(int(round(config.minFlowgpm,1)))
             window.FlowSlider.setMaximum(int(round(config.maxFlowgpm,1)))
             window.FlowSlider.blockSignals(False)
+            window.FlowRate.setStyleSheet("background-color: rgb(255, 255, 255);")
             ValidInput = True
             recalculate()
         else:
