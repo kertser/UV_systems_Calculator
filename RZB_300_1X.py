@@ -64,22 +64,25 @@ def RED(P1,P2,Eff1,Eff2,Flow,UVT,D1Log,NLamps):
 
 #Flow coefficients
 
-HeadLossFactor = 0.0101971621298 #converting to cmH2O
-C_Flow1_11,C_Flow2_11 = 0.01349,0.28123
-C_Flow1_12,C_Flow2_12 = 0.02185,0.42439
-C_Flow1_13,C_Flow2_13 = 0.02843,0.55116
-C_Flow1_14,C_Flow2_14 = 0.0353,0.84923
+#HeadLossFactor = 0.0101971621298 #converting to cmH2O
+HeadLossFactor = 0.01  # To match the values of the old calculator
+
+
+C_Flow1_11,C_Flow2_11 = 0.01349, 0.28123
+C_Flow1_12,C_Flow2_12 = 0.02185, 0.42439
+C_Flow1_13,C_Flow2_13 = 0.02843, 0.55116
+C_Flow1_14,C_Flow2_14 = 0.0353, 0.84923
 
 
 
 def HeadLoss(Flow,NLamps):
     if NLamps == 2:
-        return round((C_Flow1_11*Flow**2+C_Flow2_11*Flow)*HeadLossFactor,1)
+        return round((C_Flow1_11*Flow**2+C_Flow2_11*Flow)/100*HeadLossFactor,1)
     elif NLamps == 4:
-        return round((C_Flow1_12*Flow**2+C_Flow2_12*Flow)*HeadLossFactor,1)
+        return round((C_Flow1_12*Flow**2+C_Flow2_12*Flow)/100*HeadLossFactor,1)
     elif NLamps == 6:
-        return round((C_Flow1_13*Flow**2+C_Flow2_13*Flow)*HeadLossFactor,1)
+        return round((C_Flow1_13*Flow**2+C_Flow2_13*Flow)/100*HeadLossFactor,1)
     elif NLamps == 8:
-        return round((C_Flow1_14*Flow**2+C_Flow2_14*Flow)*HeadLossFactor,1)
+        return round((C_Flow1_14*Flow**2+C_Flow2_14*Flow)/100*HeadLossFactor,1)
     else:
         return 'Error'

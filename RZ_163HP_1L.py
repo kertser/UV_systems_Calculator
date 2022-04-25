@@ -14,7 +14,8 @@ C_Flow_2L = 5.31E-07
 C_Flow_3L = 7.35E-07
 C_Flow_4L = 9.14E-07
 
-HeadLossFactor = 1019.72 #bar to cmH2O
+# HeadLossFactor = 1019.72 #bar to cmH2O
+HeadLossFactor = 1000  # To match the values of the old calculator
 
 
 ## Dose Coefficents
@@ -136,10 +137,10 @@ def HeadLoss(Flow,NLamps):
     #dP[bar]=10*Cflow*Flow^2
     # HeadLoss[cmH2O] = HeadLossFactor*C_Flow*Flow^2
     if NLamps == 1:
-        return round(HeadLossFactor*(10*C_Flow_1L*Flow**2)/100,2)
+        return round(HeadLossFactor*(C_Flow_1L*Flow**2)/100,2)
     if NLamps == 2:
-        return round(HeadLossFactor*(10*C_Flow_2L*Flow**2)/100,2)
+        return round(HeadLossFactor*(C_Flow_2L*Flow**2)/100,2)
     if NLamps == 3:
-        return round(HeadLossFactor*(10*C_Flow_3L*Flow**2)/100,2)
+        return round(HeadLossFactor*(C_Flow_3L*Flow**2)/100,2)
     if NLamps == 4:
-        return round(HeadLossFactor*(10*C_Flow_4L*Flow**2)/100,2)
+        return round(HeadLossFactor*(C_Flow_4L*Flow**2)/100,2)

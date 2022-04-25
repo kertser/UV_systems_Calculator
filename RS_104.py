@@ -13,7 +13,7 @@ from math import exp as exp
 # Davg(P,Q,UVT)=A*((P^α)/(Q^β))*EXP(γ*(UVT/100))
 
 
-# Dose Coefficents
+# Dose Coefficients
 
 Z1 = 0.00013676525437778
 alfa = 1.82647844522826

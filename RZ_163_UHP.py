@@ -96,7 +96,9 @@ def VF_RED_cripto(RED,UVT,LI):
     VF=((1+UIN)*BRED)
     return round(RED/VF,1) #Return the credited dose after the validation factor
 
-HeadLossFactor = 1019.72 #converting bar to cmH2O
+#HeadLossFactor = 1019.72 #converting bar to cmH2O
+HeadLossFactor = 1000  # To match the values of the old calculator
+
 # C-flow [bar/(m^3/hour)^2]
 C_Flow_1L = 2.61E-07
 C_Flow_2L = 5.31E-07
@@ -107,11 +109,11 @@ def HeadLoss(Flow,NLamps):
     #dP[bar]=10*Cflow*Flow^2
     # HeadLoss[cmH2O] = HeadLossFactor*C_Flow*Flow^2
     if NLamps == 1:
-        return round(HeadLossFactor*(10*C_Flow_1L*Flow**2)/100,2)
+        return round(HeadLossFactor*(C_Flow_1L*Flow**2)/100,2)
     if NLamps == 2:
-        return round(HeadLossFactor*(10*C_Flow_2L*Flow**2)/100,2)
+        return round(HeadLossFactor*(C_Flow_2L*Flow**2)/100,2)
     if NLamps == 3:
-        return round(HeadLossFactor*(10*C_Flow_3L*Flow**2)/100,2)
+        return round(HeadLossFactor*(C_Flow_3L*Flow**2)/100,2)
     if NLamps == 4:
-        return round(HeadLossFactor*(10*C_Flow_4L*Flow**2)/100,2)
+        return round(HeadLossFactor*(C_Flow_4L*Flow**2)/100,2)
     

@@ -44,22 +44,24 @@ def VF_RED(RED):
     VF = VF_A*(1+VF_B/RED)
     return round(RED/VF,1)
 
-HeadLossFactor = 10.1974 #converting bar to mH2O
+#HeadLossFactor = 10.1974 #converting bar to mH2O
+HeadLossFactor = 1000  # To match the values of the old calculator
+
 # C-flow [bar/(m^3/hour)^2]
-C_Flow1 = 0.000000012
-C_Flow2 = 0.000000022
-C_Flow3 = 0.000000032
-C_Flow4 = 0.000000041
+C_Flow1 = 0.000000012/2
+C_Flow2 = 0.000000022/2
+C_Flow3 = 0.000000032/2
+C_Flow4 = 0.000000041/2
 
 
 def HeadLoss(Flow,NLamps):
     # HeadLoss[cmH2O] = HeadLossFactor*C_Flow*Flow^2
     if NLamps == 1:
-        return round(HeadLossFactor*C_Flow1*Flow**2,2)
+        return round((HeadLossFactor*C_Flow1*Flow**2)/100,2)
     if NLamps == 2:
-        return round(HeadLossFactor*C_Flow2*Flow**2,2)
+        return round((HeadLossFactor*C_Flow2*Flow**2)/100,2)
     if NLamps == 3:
-        return round(HeadLossFactor*C_Flow3*Flow**2,2)
+        return round((HeadLossFactor*C_Flow3*Flow**2)/100,2)
     if NLamps == 4:
-        return round(HeadLossFactor*C_Flow4*Flow**2,2)
+        return round((HeadLossFactor*C_Flow4*Flow**2)/100,2)
     
