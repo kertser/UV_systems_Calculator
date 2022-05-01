@@ -345,12 +345,12 @@ def recalculate():
         window.AveragePowerConsumption.setAlignment(QtCore.Qt.AlignCenter)
 
     if window.UVSystem.currentText() == 'RZ-163-UHP':
-        from RZ_163_UHP import RED as RED
-        from RZ_163_UHP import HeadLoss as HL
-        from RZ_163_UHP import LampPower as LampPower
+        from RZ_163_UHP2 import RED as RED
+        from RZ_163_UHP2 import HeadLoss as HL
+        from RZ_163_UHP2 import LampPower as LampPower
 
-        #from RZ_163_UHP import minFlow as minFlow
-        #from RZ_163_UHP import maxFlow as maxFlow
+        #from RZ_163_UHP2 import minFlow as minFlow
+        #from RZ_163_UHP2 import maxFlow as maxFlow
 
         #config.minFlow = minFlow
         #config.maxFlow = maxFlow
@@ -1724,8 +1724,9 @@ def FlowRate():
     global ValidInput
     try:
         float(window.FlowRate.text())
-        #if (float(window.FlowRate.text()) >= config.minFlow) & (float(window.FlowRate.text()) <= config.maxFlow):
-        window.FlowRate.setStyleSheet("background-color: rgb(255, 255, 255);")
+        if (float(window.FlowRate.text()) >= config.minFlow) & (float(window.FlowRate.text()) <= config.maxFlow):
+            window.FlowRate.setStyleSheet("background-color: rgb(255, 255, 255);")
+            window.RED.setStyleSheet("background-color: rgb(255, 255, 255);")
 
         params = config.SystemParameters.loc[(config.SystemParameters['UV-System']==window.UVSystem.currentText()) & (config.SystemParameters['Model']==window.UVModel.currentText())]
         if window.vertical.isChecked():
@@ -1736,6 +1737,7 @@ def FlowRate():
             window.FlowRate.setStyleSheet("background-color: rgb(255, 0, 0);")
             window.RED.setStyleSheet("background-color: rgb(255, 0, 0);")
         else:
+            window.FlowRate.setStyleSheet("background-color: rgb(255, 255, 255);")
             window.RED.setStyleSheet("background-color: rgb(255, 255, 255);")
 
         if ((config.FlowUnits == 'm3h') & (float(window.FlowRate.text()) >= (config.minFlow)) & (float(window.FlowRate.text()) <= (config.maxFlow))):
@@ -1747,6 +1749,7 @@ def FlowRate():
             window.FlowSlider.setMaximum(int(round(config.maxFlow,1)))
             window.FlowSlider.blockSignals(False)
             window.FlowRate.setStyleSheet("background-color: rgb(255, 255, 255);")
+            window.RED.setStyleSheet("background-color: rgb(255, 255, 255);")
             ValidInput = True
             recalculate()
         elif ((config.FlowUnits == 'gpm') & (float(window.FlowRate.text()) >= (config.minFlowgpm)) & (float(window.FlowRate.text()) <= (config.maxFlowgpm))): #USgpm units
@@ -1758,6 +1761,7 @@ def FlowRate():
             window.FlowSlider.setMaximum(int(round(config.maxFlowgpm,1)))
             window.FlowSlider.blockSignals(False)
             window.FlowRate.setStyleSheet("background-color: rgb(255, 255, 255);")
+            window.RED.setStyleSheet("background-color: rgb(255, 255, 255);")
             ValidInput = True
             recalculate()
         else:

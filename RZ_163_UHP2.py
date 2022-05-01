@@ -5,26 +5,26 @@ Created on Thu Dec 10 09:22:00 2020
 File for RZ-163-UHP Dose Calculator
 
 @author: Mike
-This version is obsolete - remove
+This is an updated version for UHP with fixed UVT254>96[%-1cm]
 """
 from math import log10 as log, log as ln
 
 ## Dose Coefficents
 
-AH = 6.6859E+00
-BH = 9.3151E-01
-CH = -7.6224E-01
-DH = 2.4590E+00
-EH = -9.0498E-01
-FH = 1.3572E+00
-GH = -5.6433E+00
-HH = -9.2460E-01
-IH = -2.7938E+01
-JH = 4.9246E+01
-KH = 1.2532E-01
-LH = 1.3062E+00
-MH = -1.3338E+01
-NH = 1.2002E+00
+AH = 6.68586909613977
+BH = 0.931505620533178
+CH = -0.762243989524516
+DH = 2.45902603509457
+EH = -0.904980935576177
+FH = 1.3572137958403
+GH = -5.64328172563936
+HH = -0.924600741065049
+IH = -27.9378034190639
+JH = 49.2460500117299
+KH = 0.125320453051158
+LH = 1.30623706193718
+MH = -13.3376614904183
+NH = 1.20023530288472
 
 AL = 7.3638E+00
 BL = 1.1023E+00
@@ -61,12 +61,27 @@ Flow units - [m3/h] - in this calculator converted to us_gpm for calculation
 """
 
 def RED(P,Status,Flow,UVT254,UVT215,D1Log,NLamps):
+
+
     A254 = -log(UVT254/100)
     A215 = -log(UVT215/100)
     Flow = Flow*4.402868# in this specific case it is a conversion to gpm
-    RED_HL=10**AH*(Status/100)*(P/100)**(BH+CH*A254+DH*A254**2)*Flow**(EH+FH*A254+GH*A254**2)*(1/A254)**(HH+IH*A254+JH*A254**2)*D1Log**(KH+LH*A254+MH*A254**2)*NLamps**NH
-    RED_LL=10**AL*(Status/100)*(P/100)**(BL+CL*A215+DL*A215**2)*Flow**(EL+FL*A215+GL*A215**2)*(1/A215)**(HL+IL*A215+JL*A215**2)*D1Log**(KL+LL*A215+ML*A215**2)*NLamps**NL
-    RED = RED_HL+RED_LL
+
+    if UVT254 < 96:
+
+        RED_HL=10**AH*((Status/100)*(P/100))**(BH+CH*A254+DH*A254**2)*Flow**(EH+FH*A254+GH*A254**2)*(1/A254)**(HH+IH*A254+JH*A254**2)*D1Log**(KH+LH*A254+MH*A254**2)*NLamps**NH
+        RED_LL=10**AL*((Status/100)*(P/100))**(BL+CL*A215+DL*A215**2)*Flow**(EL+FL*A215+GL*A215**2)*(1/A215)**(HL+IL*A215+JL*A215**2)*D1Log**(KL+LL*A215+ML*A215**2)*NLamps**NL
+        RED = RED_HL+RED_LL
+
+    else:
+        A254_96 = -log(96/100)
+        A215_96 = -log(96/100)
+
+        RED_HL96 = 10**AH*((Status/100)*(P/100))**(BH+CH*A254_96+DH*A254_96**2)*Flow**(EH+FH*A254_96+GH*A254_96**2)*(1/A254_96)**(HH+IH*A254_96+JH*A254_96**2)*D1Log**(KH+LH*A254_96+MH*A254_96**2)*NLamps**NH
+        RED_LL96=10**AL*((Status/100)*(P/100))**(BL+CL*A215_96+DL*A215_96**2)*Flow**(EL+FL*A215_96+GL*A215_96**2)*(1/A215_96)**(HL+IL*A215_96+JL*A215_96**2)*D1Log**(KL+LL*A215_96+ML*A215_96**2)*NLamps**NL
+
+        RED96 = round((RED_HL96+RED_LL96),2)
+        RED = RED96 * (1.3**(UVT254-96))
     
     return round(RED,1)
 
