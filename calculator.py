@@ -171,6 +171,7 @@ class Ui(QtWidgets.QDialog):
         self.FlowDoseCalc.clicked.connect(FlowForDose)
 
         self.FlowUnits.currentIndexChanged.connect(FlowUnits)
+        self.PressureUnits.currentIndexChanged.connect(PressureUnits)
 
         self.UVSystem.addItems(config.UV_Systems)
         self.UVModel.addItems(config.Modules)
@@ -334,7 +335,7 @@ def recalculate():
         if (float(window.RED.toPlainText())<0):
             window.RED.setText('0')
         window.RED.setAlignment(QtCore.Qt.AlignCenter)
-        window.HeadLoss.setText(str(HL(config.FlowRate_m3h/config.nBranches,config.NLamps)))
+        window.HeadLoss.setText(str(round(config.HL_Multiplier*HL(config.FlowRate_m3h/config.nBranches,config.NLamps),2)))
         window.HeadLoss.setAlignment(QtCore.Qt.AlignCenter)
 
         config.MaxLampsPower = LampPower * config.NLamps
@@ -361,7 +362,7 @@ def recalculate():
         if (float(window.RED.toPlainText())<0):
             window.RED.setText('0')
         window.RED.setAlignment(QtCore.Qt.AlignCenter)
-        window.HeadLoss.setText(str(HL(config.FlowRate_m3h/config.nBranches,config.NLamps)))
+        window.HeadLoss.setText(str(round(config.HL_Multiplier*HL(config.FlowRate_m3h/config.nBranches,config.NLamps),2)))
         window.HeadLoss.setAlignment(QtCore.Qt.AlignCenter)
 
         config.MaxLampsPower = LampPower * config.NLamps
@@ -395,7 +396,7 @@ def recalculate():
         if (float(window.RED.toPlainText())<0):
             window.RED.setText('0')
         window.RED.setAlignment(QtCore.Qt.AlignCenter)
-        window.HeadLoss.setText(str(HL(config.FlowRate_m3h/config.nBranches,lampsPerBranch[window.UVModel.currentText()])))
+        window.HeadLoss.setText(str(round(config.HL_Multiplier*HL(config.FlowRate_m3h/config.nBranches,lampsPerBranch[window.UVModel.currentText()]),2)))
         window.HeadLoss.setAlignment(QtCore.Qt.AlignCenter)
 
         config.MaxLampsPower = LampPower * config.NLamps
@@ -443,7 +444,7 @@ def recalculate():
         if (float(window.RED.toPlainText())<0):
             window.RED.setText('0')
         window.RED.setAlignment(QtCore.Qt.AlignCenter)
-        window.HeadLoss.setText(str(HL(config.FlowRate_m3h/config.nBranches,lampsPerBranch[window.UVModel.currentText()])))
+        window.HeadLoss.setText(str(round(config.HL_Multiplier*HL(config.FlowRate_m3h/config.nBranches,lampsPerBranch[window.UVModel.currentText()]),2)))
         window.HeadLoss.setAlignment(QtCore.Qt.AlignCenter)
 
         config.MaxLampsPower = LampPower * config.NLamps
@@ -491,7 +492,7 @@ def recalculate():
         if (float(window.RED.toPlainText())<0):
             window.RED.setText('0')
         window.RED.setAlignment(QtCore.Qt.AlignCenter)
-        window.HeadLoss.setText(str(HL(config.FlowRate_m3h/config.nBranches,lampsPerBranch[window.UVModel.currentText()])))
+        window.HeadLoss.setText(str(round(config.HL_Multiplier*HL(config.FlowRate_m3h/config.nBranches,lampsPerBranch[window.UVModel.currentText()]),2)))
         window.HeadLoss.setAlignment(QtCore.Qt.AlignCenter)
 
         config.MaxLampsPower = LampPower * config.NLamps
@@ -523,7 +524,7 @@ def recalculate():
         if (float(window.RED.toPlainText())<0):
             window.RED.setText('0')
         window.RED.setAlignment(QtCore.Qt.AlignCenter)
-        window.HeadLoss.setText(str(HL(config.FlowRate_m3h/config.nBranches,config.NLamps)))
+        window.HeadLoss.setText(str(round(config.HL_Multiplier*HL(config.FlowRate_m3h/config.nBranches,config.NLamps),2)))
         window.HeadLoss.setAlignment(QtCore.Qt.AlignCenter)
 
         config.MaxLampsPower = LampPower * config.NLamps
@@ -553,7 +554,7 @@ def recalculate():
         if (float(window.RED.toPlainText())<0):
             window.RED.setText('0')
         window.RED.setAlignment(QtCore.Qt.AlignCenter)
-        window.HeadLoss.setText(str(HL(config.FlowRate_m3h/config.nBranches,config.NLamps)))
+        window.HeadLoss.setText(str(round(config.HL_Multiplier*HL(config.FlowRate_m3h/config.nBranches,config.NLamps),2)))
         window.HeadLoss.setAlignment(QtCore.Qt.AlignCenter)
 
         config.MaxLampsPower = LampPower * config.NLamps
@@ -580,7 +581,7 @@ def recalculate():
         if (float(window.RED.toPlainText())<0):
             window.RED.setText('0')
         window.RED.setAlignment(QtCore.Qt.AlignCenter)
-        window.HeadLoss.setText(str(HL(config.FlowRate_m3h/config.nBranches,config.NLamps)))
+        window.HeadLoss.setText(str(round(config.HL_Multiplier*HL(config.FlowRate_m3h/config.nBranches,config.NLamps),2)))
         window.HeadLoss.setAlignment(QtCore.Qt.AlignCenter)
 
         config.MaxLampsPower = LampPower * config.NLamps
@@ -619,7 +620,7 @@ def recalculate():
         if (float(window.RED.toPlainText())<0):
             window.RED.setText('0')
         window.RED.setAlignment(QtCore.Qt.AlignCenter)
-        window.HeadLoss.setText(str(HL(config.FlowRate_m3h/config.nBranches,config.NLamps)))
+        window.HeadLoss.setText(str(round(config.HL_Multiplier*HL(config.FlowRate_m3h/config.nBranches,config.NLamps),2)))
         window.HeadLoss.setAlignment(QtCore.Qt.AlignCenter)
 
         config.MaxLampsPower = LampPower * config.NLamps
@@ -669,7 +670,7 @@ def recalculate():
         if (float(window.RED.toPlainText())<0):
             window.RED.setText('0')
         window.RED.setAlignment(QtCore.Qt.AlignCenter)
-        window.HeadLoss.setText(str(HL(config.FlowRate_m3h/config.nBranches,config.NLamps)))
+        window.HeadLoss.setText(str(round(config.HL_Multiplier*HL(config.FlowRate_m3h/config.nBranches,config.NLamps),2)))
         window.HeadLoss.setAlignment(QtCore.Qt.AlignCenter)
 
         config.MaxLampsPower = LampPower * config.NLamps
@@ -696,7 +697,7 @@ def recalculate():
         if (float(window.RED.toPlainText())<0):
             window.RED.setText('0')
         window.RED.setAlignment(QtCore.Qt.AlignCenter)
-        window.HeadLoss.setText(str(HL(config.FlowRate_m3h/config.nBranches,config.NLamps)))
+        window.HeadLoss.setText(str(round(config.HL_Multiplier*HL(config.FlowRate_m3h/config.nBranches,config.NLamps),2)))
         window.HeadLoss.setAlignment(QtCore.Qt.AlignCenter)
 
         config.MaxLampsPower = LampPower * config.NLamps
@@ -739,7 +740,7 @@ def recalculate():
         if (float(window.RED.toPlainText())<0):
             window.RED.setText('0')
         window.RED.setAlignment(QtCore.Qt.AlignCenter)
-        window.HeadLoss.setText(str(HL(config.FlowRate_m3h/config.nBranches,config.NLamps)))
+        window.HeadLoss.setText(str(round(config.HL_Multiplier*HL(config.FlowRate_m3h/config.nBranches,config.NLamps),2)))
         window.HeadLoss.setAlignment(QtCore.Qt.AlignCenter)
 
         config.MaxLampsPower = LampPower * config.NLamps
@@ -782,7 +783,7 @@ def recalculate():
                     #window.inactivationBar.setValue(config.achievedLI)
             window.inactivationBar.setValue(int(config.AchievedLI))
 
-    if (float(window.HeadLoss.toPlainText())>config.HeadLossWarning): # Set warning on HeadLoss >2m
+    if (float(window.HeadLoss.toPlainText())>config.HeadLossWarning*config.HL_Multiplier): # Set warning on HeadLoss >2m
         window.HeadLoss.setStyleSheet("background-color: rgb(255, 0, 0);")
     else:
         window.HeadLoss.setStyleSheet("background-color: rgb(255, 255, 255);")
@@ -1803,6 +1804,22 @@ def FlowUnits():
         window.FlowSlider.setMaximum(int(round(config.maxFlowgpm,1)))
         window.FlowRate.setAlignment(QtCore.Qt.AlignCenter)
         recalculate()
+
+def PressureUnits():
+    if (window.PressureUnits.currentText()=='[mH₂O]'):
+        config.FlowUnits = 'mH2O'
+        config.HL_Multiplier = 1
+    if (window.PressureUnits.currentText()=='[cmH₂O]'):
+        config.FlowUnits = 'cmH2O'
+        config.HL_Multiplier = 100
+    if (window.PressureUnits.currentText()=='[inH₂O]'):
+        config.FlowUnits = 'inH2O'
+        config.HL_Multiplier = 39.3701
+    if (window.PressureUnits.currentText()=='[inH₂O]'):
+        config.FlowUnits = 'bar'
+        config.HL_Multiplier = 0.098064
+    FlowUnits()
+    recalculate()
 
 
 def FlowForDose():
