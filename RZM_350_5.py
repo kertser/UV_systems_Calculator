@@ -189,8 +189,9 @@ def RED(P1,P2,P3,P4,P5,P6,P7,P8,Eff1,Eff2,Eff3,Eff4,Eff5,Eff6,Eff7,Eff8,Flow,UVT
 def HeadLoss(Flow,NLamps):
     
     # HeadLoss[cmH2O] = HeadLossFactor*C_Flow*Flow^2
+    HeadLossFactor = 0.01 # To match the old calculator
     if NLamps == 5:
-        return round((C_Flow1_11*Flow**2+C_Flow2_11*Flow)/100,2)
+        return round(HeadLossFactor*(C_Flow1_11*Flow**2+C_Flow2_11*Flow)/100,2)
     if NLamps == 10:
-        return round(2*(C_Flow1_12*Flow**2+C_Flow2_12*Flow)/100,2) # shall be changed later on
+        return round(HeadLossFactor*2*(C_Flow1_12*Flow**2+C_Flow2_12*Flow)/100,2) # shall be changed later on
     

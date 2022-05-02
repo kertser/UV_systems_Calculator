@@ -64,6 +64,6 @@ C_Flow2 = 2.03679 #!!! Change
 
 def HeadLoss(Flow,NLamps):
     if NLamps == 7: #this is a default one
-        return round(HeadLossFactor/100*(C_Flow1*Flow**2+C_Flow2*Flow),2)        
+        return round(HeadLossFactor/1000*(C_Flow1*Flow**2+C_Flow2*Flow),2)
     else:
         return 'Error'
