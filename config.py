@@ -112,8 +112,8 @@ Modules = ['11','12','13','14'] #Just for the initial value per RZ-163
 
 ValidatedDoseFamilies = ['RZ-163','RZ-163-HP','RZ-163-UHP','RS-104','RZ-104','RZ-300',
                          'RZB-300','EP-600','RZM-350','RZM-350-Marine','RZMW-350','RZM-200','R-200']
-MunicipalFamilies = ['RZ-163','RZ-104','RZ-300','R-200']
-DairyFamilies = ['RZ-163','RZ-163-HP','RZ-104','RZ-300','RZB-300','R-200']
+MunicipalFamilies = ['RZ-163','RZ-163-UHP','RZ-104','RZ-300'] #EPA families
+DairyFamilies = ['RZ-163','RZ-163-HP','RZ-104','RZ-300','RZB-300','R-200'] #Absolete, remove
 
 UV_Systems = ValidatedDoseFamilies # Default Values
 

@@ -129,10 +129,18 @@ class Ui(QtWidgets.QDialog):
         self.UVT215.setAlignment(QtCore.Qt.AlignCenter)
         #self.UVT.textChanged.connect(UVT215)
         
-        # Disable EPA/PMO and Dechlorination in Marketing version
-        self.EPA.setEnabled(False)
-        self.PMO.setEnabled(False)
-        self.Dechlorination.setEnabled(False)
+        # Disable in Marketing version
+
+        self.PMO.setEnabled(False) #Marketing
+        self.EPA.setEnabled(True) #Marketing
+        self.Dechlorination.setEnabled(True)
+        self.FullRangeRED.setEnabled(True)
+        self.EPA.setChecked(True)
+
+        if config.CalculatorType == 'Developer':
+            config.UV_Systems = config.ValidatedDoseFamilies
+        else:
+            config.UV_Systems = config.MunicipalFamilies
 
         # Hide UVT215 and Graphs in Marketing version
         self.UVT215.setVisible(False)
@@ -225,6 +233,7 @@ class Ui(QtWidgets.QDialog):
         
 
         if config.CalculatorType == 'Developer':
+
             self.PlotRedUVT.setEnabled(True)
             self.PlotRedFlow.setEnabled(True)
             self.PlotRedPower.setEnabled(True)
@@ -241,6 +250,9 @@ class Ui(QtWidgets.QDialog):
             self.EPA.setEnabled(True)
             self.PMO.setEnabled(True)
             self.Dechlorination.setEnabled(True)
+
+            self.FullRangeRED.setEnabled(True)
+            self.FullRangeRED.setChecked(True)
             
 
 #%% Data table load - pathogens
@@ -270,7 +282,7 @@ class Ui(QtWidgets.QDialog):
         self.D1Log.setText(str(config.DefaultD1Log))
         self.D1Log.blockSignals(False)
 
-#%% Tree-Widget for pathogens
+        #%% Tree-Widget for pathogens
 
         PTree=[]
         PathogenTypes = config.KillData['Type'].unique().tolist()
@@ -1289,8 +1301,12 @@ def Developer():
                 
                 window.EPA.setEnabled(True)
                 window.PMO.setEnabled(True)
+                window.FullRangeRED.setEnabled(True)
+                window.FullRangeRED.setChecked(True)
+
                 window.Dechlorination.setEnabled(True)
 
+                FullRanged()
                 config.CalculatorType = 'Developer'
                 UVModel()
 
@@ -1318,11 +1334,15 @@ def Marketing():
         window.UVT215Label.setVisible(True)
         
         
-        window.EPA.setEnabled(False)
+        window.EPA.setEnabled(True)
         window.PMO.setEnabled(False)
-        window.Dechlorination.setEnabled(False)
-        window.FullRangeRED.setChecked(True)
-        FullRanged()
+        window.FullRangeRED.setEnabled(True)
+
+        #window.Dechlorination.setEnabled(False)
+        #window.FullRangeRED.setChecked(True)
+        window.EPA.setChecked(True)
+
+        EPA()
 
         config.CalculatorType = 'Marketing'
         UVModel()
@@ -1475,22 +1495,29 @@ def Dechlorination(): # Dechlorination and ozone decomposition for specific RED
     window.UVT254Slider.blockSignals(True)
     window.UVT254Slider.setValue(int(config.UVT))
     window.UVT254Slider.blockSignals(False)
+
     window.OzoneIn.setEnabled(True)
-    window.ChlorineIn.setEnabled(True)
+    if config.CalculatorType == 'Developer':
+        window.ChlorineIn.setEnabled(True)
 
     window.OzoneIn.blockSignals(True)
-    window.ChlorineIn.blockSignals(True)
+    if config.CalculatorType == 'Developer':
+        window.ChlorineIn.blockSignals(True)
 
     window.OzoneIn.setText(str(config.OzoneIn))
     window.OzoneOut.setText(str(config.OzoneOut))
-    window.ChlorineIn.setText(str(config.ChlorineIn))
-    window.ChlorineOut.setText(str(config.ChlorineOut))
+
+    if config.CalculatorType == 'Developer':
+        window.ChlorineIn.setText(str(config.ChlorineIn))
+        window.ChlorineOut.setText(str(config.ChlorineOut))
 
     window.OzoneIn.blockSignals(False)
-    window.ChlorineIn.blockSignals(False)
+    if config.CalculatorType == 'Developer':
+        window.ChlorineIn.blockSignals(False)
 
     window.OzoneOut.setAlignment(QtCore.Qt.AlignCenter)
-    window.ChlorineOut.setAlignment(QtCore.Qt.AlignCenter)
+    if config.CalculatorType == 'Developer':
+        window.ChlorineOut.setAlignment(QtCore.Qt.AlignCenter)
 
 def DechloCalc(): # Recalculate Dechlorination and ozone decomposition
     global ValidInput
@@ -1818,6 +1845,9 @@ def PressureUnits():
     if (window.PressureUnits.currentText()=='[inH₂O]'):
         config.FlowUnits = 'bar'
         config.HL_Multiplier = 0.098064
+    if (window.PressureUnits.currentText()=='[PSI]'):
+        config.FlowUnits = 'psi'
+        config.HL_Multiplier = 1.42233
     FlowUnits()
     recalculate()
 
