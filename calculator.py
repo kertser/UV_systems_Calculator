@@ -149,7 +149,7 @@ class Ui(QtWidgets.QDialog):
 
         # Hide D1Log in Marketing Version         
         self.D1Log.setEnabled(False)
-        self.Pathogens_Table.setEnabled(False)
+        #self.Pathogens_Table.setEnabled(False)
 
         self.ge1 = QtWidgets.QGraphicsBlurEffect()
         self.UVT215Label.setGraphicsEffect(self.ge1)
@@ -1185,59 +1185,63 @@ def PlotREDvsDrive():
 def SelectFromTable():
     global ValidInput
 
-    items = window.LogReductionTable.selectedItems()
-    PatName = str(items[0].text())
-    D1Log = str(items[1].text())
+    if config.CalculatorType == 'Developer':
 
-    config.ManualD1Log = False
+        items = window.LogReductionTable.selectedItems()
+        PatName = str(items[0].text())
+        D1Log = str(items[1].text())
 
-    if D1Log != '':
-        config.D1Log = float(D1Log)
-        config.SelectedPathogen = str(PatName)
-        window.SelectedPathogen.setStyleSheet("background-color: rgb(255, 255, 255);")
-        window.D1Log.blockSignals(True)
-        window.D1Log.setText(str(D1Log))
-        window.D1Log.blockSignals(False)
+        config.ManualD1Log = False
+
+        if D1Log != '':
+            config.D1Log = float(D1Log)
+            config.SelectedPathogen = str(PatName)
+            window.SelectedPathogen.setStyleSheet("background-color: rgb(255, 255, 255);")
+            window.D1Log.blockSignals(True)
+            window.D1Log.setText(str(D1Log))
+            window.D1Log.blockSignals(False)
+            window.SelectedPathogen.setText(str(PatName))
+            ValidInput = True
+            recalculate()
+        else:
+            window.SelectedPathogen.setStyleSheet("background-color: rgb(0, 255, 0);")
+            window.D1Log.blockSignals(True)
+            window.D1Log.setText('Please select specific')
+            window.D1Log.blockSignals(False)
+            ValidInput = False
+
         window.SelectedPathogen.setText(str(PatName))
-        ValidInput = True
-        recalculate()
-    else:
-        window.SelectedPathogen.setStyleSheet("background-color: rgb(0, 255, 0);")
-        window.D1Log.blockSignals(True)
-        window.D1Log.setText('Please select specific')
-        window.D1Log.blockSignals(False)
-        ValidInput = False
-
-    window.SelectedPathogen.setText(str(PatName))
 
 def SelectPathogen():
     global ValidInput
 
-    getSelected = window.Pathogens.selectedItems()
-    if getSelected:
-        baseNode = getSelected[0]
-        PatName = baseNode.text(0) #Name of the pathogen
-        D1Log = (baseNode.text(1)) #D-1Log value
-        config.ManualD1Log = False
+    if config.CalculatorType == 'Developer':
 
-    if D1Log != '':
-        config.D1Log = float(D1Log)
-        config.SelectedPathogen = str(PatName)
-        window.SelectedPathogen.setStyleSheet("background-color: rgb(255, 255, 255);")
-        window.D1Log.blockSignals(True)
-        window.D1Log.setText(str(D1Log))
-        window.D1Log.blockSignals(False)
+        getSelected = window.Pathogens.selectedItems()
+        if getSelected:
+            baseNode = getSelected[0]
+            PatName = baseNode.text(0) #Name of the pathogen
+            D1Log = (baseNode.text(1)) #D-1Log value
+            config.ManualD1Log = False
+
+        if D1Log != '':
+            config.D1Log = float(D1Log)
+            config.SelectedPathogen = str(PatName)
+            window.SelectedPathogen.setStyleSheet("background-color: rgb(255, 255, 255);")
+            window.D1Log.blockSignals(True)
+            window.D1Log.setText(str(D1Log))
+            window.D1Log.blockSignals(False)
+            window.SelectedPathogen.setText(str(PatName))
+            ValidInput = True
+            recalculate()
+        else:
+            window.SelectedPathogen.setStyleSheet("background-color: rgb(0, 255, 0);")
+            window.D1Log.blockSignals(True)
+            window.D1Log.setText('Please select specific')
+            window.D1Log.blockSignals(False)
+            ValidInput = False
+
         window.SelectedPathogen.setText(str(PatName))
-        ValidInput = True
-        recalculate()
-    else:
-        window.SelectedPathogen.setStyleSheet("background-color: rgb(0, 255, 0);")
-        window.D1Log.blockSignals(True)
-        window.D1Log.setText('Please select specific')
-        window.D1Log.blockSignals(False)
-        ValidInput = False
-
-    window.SelectedPathogen.setText(str(PatName))
 
 def D1LogManual():
     global ValidInput
@@ -1318,7 +1322,7 @@ def Marketing():
 
         window.D1Log.setEnabled(False)
         #window.D1Log.setVisible(False)
-        window.Pathogens_Table.setEnabled(False)
+        #window.Pathogens_Table.setEnabled(False)
 
         window.UVT215.setVisible(False)
         window.UVT215units.setVisible(False)
@@ -1332,8 +1336,7 @@ def Marketing():
         window.UVT215.setVisible(True)
         window.UVT215units.setVisible(True)
         window.UVT215Label.setVisible(True)
-        
-        
+
         window.EPA.setEnabled(True)
         window.PMO.setEnabled(False)
         window.FullRangeRED.setEnabled(True)
@@ -1342,6 +1345,7 @@ def Marketing():
         #window.FullRangeRED.setChecked(True)
         window.EPA.setChecked(True)
 
+        ResetPathogen()
         EPA()
 
         config.CalculatorType = 'Marketing'
