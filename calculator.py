@@ -88,14 +88,19 @@ class Login(QtWidgets.QDialog):
 class Ui(QtWidgets.QDialog):
     def __init__(self):
         super(Ui, self).__init__()
-        uic_path = resource_path("Calculator_UI.ui")
+        uic_path = resource_path("Calculator_UIa1.ui")
         uic.loadUi(uic_path, self)
 
         # Connect the radio buttons
         self.FullRangeRED.clicked.connect(FullRanged)
         self.EPA.clicked.connect(EPA)
-        self.PMO.clicked.connect(PMO)
+        #self.PMO.clicked.connect(PMO)
         self.Dechlorination.clicked.connect(Dechlorination)
+
+        # Connect Hg regular, OF and VUV factors
+        self.HgUV.clicked.connect(LampFactor_Reg)
+        self.HgOF.clicked.connect(LampFactor_OF)
+        self.HgVUV.clicked.connect(LampFactor_VUV)
 
         self.OzoneIn.setText(str(config.OzoneIn))
         self.ChlorineIn.setText(str(config.ChlorineIn))
@@ -103,7 +108,7 @@ class Ui(QtWidgets.QDialog):
         self.ChlorineOut.setText(str(config.ChlorineOut))
 
         # Connect the vertical option checkbox
-        self.vertical.clicked.connect(UVSystem)
+        self.vertical.clicked.connect(UVModel)
 
         # Connect the rest of the UI elements
         self.LampEfficiency.setText(str(config.LampEfficiency))
@@ -131,7 +136,7 @@ class Ui(QtWidgets.QDialog):
         
         # Disable in Marketing version
 
-        self.PMO.setEnabled(False) #Marketing
+        #self.PMO.setEnabled(False) #Marketing
         self.EPA.setEnabled(True) #Marketing
         self.Dechlorination.setEnabled(True)
         self.FullRangeRED.setEnabled(True)
@@ -150,6 +155,9 @@ class Ui(QtWidgets.QDialog):
         # Hide D1Log in Marketing Version         
         self.D1Log.setEnabled(False)
         #self.Pathogens_Table.setEnabled(False)
+
+        self.HgOF.setEnabled(False)
+        self.HgVUV.setEnabled(False)
 
         self.ge1 = QtWidgets.QGraphicsBlurEffect()
         self.UVT215Label.setGraphicsEffect(self.ge1)
@@ -248,7 +256,7 @@ class Ui(QtWidgets.QDialog):
             
             # Enable EPA/PMO and Dechlorination in Developer version
             self.EPA.setEnabled(True)
-            self.PMO.setEnabled(True)
+            #self.PMO.setEnabled(True)
             self.Dechlorination.setEnabled(True)
 
             self.FullRangeRED.setEnabled(True)
@@ -332,18 +340,9 @@ def recalculate():
         from R200_SDL import HeadLoss as HL
         from R200_SDL import LampPower as LampPower
 
-        #from R200_SDL import minFlow as minFlow
-        #from R200_SDL import maxFlow as maxFlow
-
-        #config.minFlow = minFlow
-        #config.maxFlow = maxFlow
-
-        #config.minFlowgpm = round(minFlow*config.m3h2gpm,1) # same in gpm
-        #config.maxFlowgpm = round(maxFlow*config.m3h2gpm,1) # same in gpm
-
         # Calculate RED and HeadLoss
-        window.RED.setText(str(RED(config.Drive,config.Drive,config.LampEfficiency,config.LampEfficiency
-                                   ,config.FlowRate_m3h/config.nBranches,config.UVT,config.D1Log,config.NLamps)))
+        window.RED.setText(str(round(config.LampFactor*RED(config.Drive,config.Drive,config.LampEfficiency,config.LampEfficiency
+                                   ,config.FlowRate_m3h/config.nBranches,config.UVT,config.D1Log,config.NLamps),1)))
         if (float(window.RED.toPlainText())<0):
             window.RED.setText('0')
         window.RED.setAlignment(QtCore.Qt.AlignCenter)
@@ -369,8 +368,8 @@ def recalculate():
         #config.maxFlow = maxFlow
 
         # Calculate RED and HeadLoss
-        window.RED.setText(str(RED(config.Drive,config.LampEfficiency,config.FlowRate_m3h/config.nBranches,
-                                   config.UVT,config.UVT215,config.D1Log,config.NLamps)))
+        window.RED.setText(str(round(config.LampFactor*RED(config.Drive,config.LampEfficiency,config.FlowRate_m3h/config.nBranches,
+                                   config.UVT,config.UVT215,config.D1Log,config.NLamps),1)))
         if (float(window.RED.toPlainText())<0):
             window.RED.setText('0')
         window.RED.setAlignment(QtCore.Qt.AlignCenter)
@@ -403,8 +402,8 @@ def recalculate():
             '22':2
         }
 
-        window.RED.setText(str(RED(config.Drive,config.Drive,config.LampEfficiency,config.LampEfficiency
-                                   ,config.FlowRate_m3h/config.nBranches,config.UVT,config.D1Log,lampsPerBranch[window.UVModel.currentText()])))
+        window.RED.setText(str(round(config.LampFactor*RED(config.Drive,config.Drive,config.LampEfficiency,config.LampEfficiency
+                                   ,config.FlowRate_m3h/config.nBranches,config.UVT,config.D1Log,lampsPerBranch[window.UVModel.currentText()]),1)))
         if (float(window.RED.toPlainText())<0):
             window.RED.setText('0')
         window.RED.setAlignment(QtCore.Qt.AlignCenter)
@@ -450,9 +449,9 @@ def recalculate():
             '14':4
         }
 
-        window.RED.setText(str(RED(config.Drive,config.Drive,config.Drive,config.Drive,config.LampEfficiency,config.LampEfficiency,
+        window.RED.setText(str(round(config.LampFactor*RED(config.Drive,config.Drive,config.Drive,config.Drive,config.LampEfficiency,config.LampEfficiency,
                                    config.LampEfficiency,config.LampEfficiency,config.FlowRate_m3h/config.nBranches,config.UVT,config.D1Log,
-                                   lampsPerBranch[window.UVModel.currentText()])))
+                                   lampsPerBranch[window.UVModel.currentText()]),1)))
         if (float(window.RED.toPlainText())<0):
             window.RED.setText('0')
         window.RED.setAlignment(QtCore.Qt.AlignCenter)
@@ -498,9 +497,9 @@ def recalculate():
             '14':4
         }
 
-        window.RED.setText(str(RED(config.Drive,config.Drive,config.Drive,config.Drive,config.LampEfficiency,config.LampEfficiency,
+        window.RED.setText(str(round(config.LampFactor*RED(config.Drive,config.Drive,config.Drive,config.Drive,config.LampEfficiency,config.LampEfficiency,
                                    config.LampEfficiency,config.LampEfficiency,config.FlowRate_m3h/config.nBranches,config.UVT,config.D1Log,
-                                   lampsPerBranch[window.UVModel.currentText()])))
+                                   lampsPerBranch[window.UVModel.currentText()]),1)))
         if (float(window.RED.toPlainText())<0):
             window.RED.setText('0')
         window.RED.setAlignment(QtCore.Qt.AlignCenter)
@@ -531,8 +530,8 @@ def recalculate():
             }
 
         # Calculate RED and HeadLoss
-        window.RED.setText(str(lampsPerBranch[window.UVModel.currentText()]*RED(config.Drive,config.LampEfficiency,
-                                   config.FlowRate_m3h/config.nBranches,config.UVT,config.D1Log,config.NLamps)))
+        window.RED.setText(str(round(lampsPerBranch[window.UVModel.currentText()]*config.LampFactor*RED(config.Drive,config.LampEfficiency,
+                                   config.FlowRate_m3h/config.nBranches,config.UVT,config.D1Log,config.NLamps),1)))
         if (float(window.RED.toPlainText())<0):
             window.RED.setText('0')
         window.RED.setAlignment(QtCore.Qt.AlignCenter)
@@ -561,8 +560,8 @@ def recalculate():
         #config.maxFlowgpm = round(maxFlow*config.m3h2gpm,1) # same in gpm
 
         # Calculate RED and HeadLoss
-        window.RED.setText(str(RED(config.Drive,config.Drive,config.LampEfficiency,config.LampEfficiency,config.FlowRate_m3h/config.nBranches,
-                               config.UVT,config.D1Log,config.NLamps)))
+        window.RED.setText(str(round(config.LampFactor*RED(config.Drive,config.Drive,config.LampEfficiency,config.LampEfficiency,config.FlowRate_m3h/config.nBranches,
+                               config.UVT,config.D1Log,config.NLamps),1)))
         if (float(window.RED.toPlainText())<0):
             window.RED.setText('0')
         window.RED.setAlignment(QtCore.Qt.AlignCenter)
@@ -588,8 +587,8 @@ def recalculate():
         #config.maxFlow = maxFlow
 
         # Calculate RED and HeadLoss
-        window.RED.setText(str(RED(config.Drive,config.Drive,config.Drive,config.Drive,config.LampEfficiency,config.LampEfficiency,
-                                   config.LampEfficiency,config.LampEfficiency,config.FlowRate_m3h/config.nBranches,config.UVT,config.D1Log,config.NLamps)))
+        window.RED.setText(str(round(config.LampFactor*RED(config.Drive,config.Drive,config.Drive,config.Drive,config.LampEfficiency,config.LampEfficiency,
+                                   config.LampEfficiency,config.LampEfficiency,config.FlowRate_m3h/config.nBranches,config.UVT,config.D1Log,config.NLamps),1)))
         if (float(window.RED.toPlainText())<0):
             window.RED.setText('0')
         window.RED.setAlignment(QtCore.Qt.AlignCenter)
@@ -625,7 +624,7 @@ def recalculate():
         #config.maxFlow = maxFlow
 
         # Calculate RED and HeadLoss
-        window.RED.setText(str(round(RED(config.Drive,config.Drive,config.Drive,config.Drive,config.Drive,
+        window.RED.setText(str(round(config.LampFactor*RED(config.Drive,config.Drive,config.Drive,config.Drive,config.Drive,
                                    config.LampEfficiency,config.LampEfficiency,config.LampEfficiency,
                                    config.LampEfficiency,config.LampEfficiency,config.FlowRate_m3h/config.nBranches,
                                    config.UVT,config.D1Log,config.NLamps),1)))
@@ -663,7 +662,7 @@ def recalculate():
         # Calculate RED and HeadLoss
 
         if ((window.UVModel.currentText() == '11 Lamps')): #11 out of 11 lamps per branch:
-            window.RED.setText(str(round(RED(config.Drive,config.Drive,config.Drive,config.Drive,config.Drive,
+            window.RED.setText(str(round(config.LampFactor*RED(config.Drive,config.Drive,config.Drive,config.Drive,config.Drive,
                                              config.Drive,config.Drive,config.Drive,config.Drive,config.Drive,
                                              config.Drive,
                                              config.LampEfficiency,config.LampEfficiency,config.LampEfficiency,
@@ -672,7 +671,7 @@ def recalculate():
                                              config.LampEfficiency,config.LampEfficiency,
                                              config.FlowRate_m3h/config.nBranches,config.UVT,config.D1Log,config.NLamps),1)))
         elif ((window.UVModel.currentText() == '7 Lamps')): #7 out of 11 lamps per branch:
-            window.RED.setText(str(round(RED(config.Drive,config.Drive,config.Drive,config.Drive,config.Drive,
+            window.RED.setText(str(round(config.LampFactor*RED(config.Drive,config.Drive,config.Drive,config.Drive,config.Drive,
                                              config.Drive,config.Drive,
                                              config.LampEfficiency,config.LampEfficiency,config.LampEfficiency,
                                              config.LampEfficiency,config.LampEfficiency,config.LampEfficiency,
@@ -705,7 +704,7 @@ def recalculate():
         #config.maxFlow = maxFlow
 
         # Calculate RED and HeadLoss
-        window.RED.setText(str(RED(config.Drive,config.LampEfficiency,config.FlowRate_m3h/config.nBranches,config.UVT,config.D1Log,config.NLamps)))
+        window.RED.setText(str(round(config.LampFactor*RED(config.Drive,config.LampEfficiency,config.FlowRate_m3h/config.nBranches,config.UVT,config.D1Log,config.NLamps),1)))
         if (float(window.RED.toPlainText())<0):
             window.RED.setText('0')
         window.RED.setAlignment(QtCore.Qt.AlignCenter)
@@ -745,7 +744,7 @@ def recalculate():
             VF=VF['Marine']
 
         # Calculate RED and HeadLoss
-        window.RED.setText(str(round(VF*RED(config.Drive,config.Drive,config.Drive,config.Drive,config.Drive,config.Drive,config.Drive,config.Drive,
+        window.RED.setText(str(round(VF*config.LampFactor*RED(config.Drive,config.Drive,config.Drive,config.Drive,config.Drive,config.Drive,config.Drive,config.Drive,
                                    config.LampEfficiency,config.LampEfficiency,config.LampEfficiency,config.LampEfficiency,
                                    config.LampEfficiency,config.LampEfficiency,config.LampEfficiency,config.LampEfficiency,
                                    config.FlowRate_m3h/config.nBranches,config.UVT,config.D1Log,config.NLamps),1)))
@@ -1304,15 +1303,20 @@ def Developer():
                 window.ge3.setEnabled(False)
                 
                 window.EPA.setEnabled(True)
-                window.PMO.setEnabled(True)
+                #window.PMO.setEnabled(True)
                 window.FullRangeRED.setEnabled(True)
                 window.FullRangeRED.setChecked(True)
 
                 window.Dechlorination.setEnabled(True)
 
+                window.HgOF.setEnabled(True)
+                window.HgVUV.setEnabled(True)
+
                 FullRanged()
                 config.CalculatorType = 'Developer'
                 UVModel()
+
+
 
 def Marketing():
     if (config.CalculatorType == 'Developer'):
@@ -1338,12 +1342,16 @@ def Marketing():
         window.UVT215Label.setVisible(True)
 
         window.EPA.setEnabled(True)
-        window.PMO.setEnabled(False)
+        #window.PMO.setEnabled(False)
         window.FullRangeRED.setEnabled(True)
 
         #window.Dechlorination.setEnabled(False)
         #window.FullRangeRED.setChecked(True)
         window.EPA.setChecked(True)
+
+        window.HgOF.setEnabled(False)
+        window.HgVUV.setEnabled(False)
+        LampFactor_Reg()
 
         ResetPathogen()
         EPA()
@@ -1388,7 +1396,7 @@ def FullTable():
 def FullRanged():
     config.FullRangeRED = True
     config.EPA = False
-    config.PMO = False
+    #config.PMO = False
 
     window.UVT.setEnabled(True)
     config.UVT = config.userUVT
@@ -1423,7 +1431,7 @@ def FullRanged():
 def EPA():
     config.FullRangeRED = False
     config.EPA = True
-    config.PMO = False
+    #config.PMO = False
 
     window.UVT.setEnabled(True)
     config.UVT = config.userUVT
@@ -1458,7 +1466,7 @@ def EPA():
 def PMO():
     config.FullRangeRED = False
     config.EPA = False
-    config.PMO = True
+    #config.PMO = True
 
     window.UVT.setEnabled(True)
     config.UVT = config.userUVT
@@ -1845,16 +1853,18 @@ def PressureUnits():
         config.HL_Multiplier = 100
     if (window.PressureUnits.currentText()=='[inH₂O]'):
         config.FlowUnits = 'inH2O'
-        config.HL_Multiplier = 39.3701
+        config.HL_Multiplier = 0.0254
     if (window.PressureUnits.currentText()=='[inH₂O]'):
         config.FlowUnits = 'bar'
         config.HL_Multiplier = 0.098064
     if (window.PressureUnits.currentText()=='[PSI]'):
         config.FlowUnits = 'psi'
         config.HL_Multiplier = 1.42233
+    if (window.PressureUnits.currentText()=='[bar]'):
+        config.FlowUnits = 'bar'
+        config.HL_Multiplier = 10.1971621
     FlowUnits()
     recalculate()
-
 
 def FlowForDose():
     Tolerance = 0.1 #[m^3/h]
@@ -1877,6 +1887,27 @@ def FlowForDose():
                 Flow2 = Flow
             else:
                 Flow1 = Flow
+
+def LampFactor_Reg(): # Regular UV lamp
+    config.LampFactor = config.Hg_Reg
+    window.HgUV.setChecked(True)
+    window.HgOF.setChecked(False)
+    window.HgVUV.setChecked(False)
+    recalculate()
+
+def LampFactor_OF(): # Regular UV lamp
+    config.LampFactor = config.Hg_OF
+    window.HgUV.setChecked(False)
+    window.HgOF.setChecked(True)
+    window.HgVUV.setChecked(False)
+    recalculate()
+
+def LampFactor_VUV(): # Regular UV lamp
+    config.LampFactor = config.Hg_VUV
+    window.HgUV.setChecked(False)
+    window.HgOF.setChecked(False)
+    window.HgVUV.setChecked(True)
+    recalculate()
 
 def resetCalc(self):
 

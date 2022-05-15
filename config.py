@@ -32,6 +32,13 @@ DeveloperPassword = 'Atlantium'
 UVT215_A = 0.2804
 UVT215_B = 0.0609
 
+#%% UV lamp Dose Factors
+Hg_Reg = 1
+Hg_OF = 0.62
+Hg_VUV = 1.19
+
+LampFactor = Hg_Reg #regular by default
+
 #%%
 
 m3h2gpm = 4.403 #Unit Conversion Factor from [m^3/hr] to [USgpm]
