@@ -1461,6 +1461,7 @@ def EPA():
 
     window.OzoneIn.setEnabled(False)
     window.ChlorineIn.setEnabled(False)
+    UVSystem()
     recalculate()
 
 def PMO():
@@ -1496,6 +1497,7 @@ def PMO():
 
     window.OzoneIn.setEnabled(False)
     window.ChlorineIn.setEnabled(False)
+    UVSystem()
     recalculate()
 
 def Dechlorination(): # Dechlorination and ozone decomposition for specific RED
