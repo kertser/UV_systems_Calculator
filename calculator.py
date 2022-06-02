@@ -88,7 +88,7 @@ class Login(QtWidgets.QDialog):
 class Ui(QtWidgets.QDialog):
     def __init__(self):
         super(Ui, self).__init__()
-        uic_path = resource_path("Calculator_UIa1.ui")
+        uic_path = resource_path("Calculator_UI.ui")
         uic.loadUi(uic_path, self)
 
         # Connect the radio buttons
