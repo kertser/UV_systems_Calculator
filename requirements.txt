@@ -1,6 +1,6 @@
-PyQt5~=5.15.6
-pandas~=1.4.1
-pymongo~=4.0.2
+PyQt5
+pandas
+pymongo
 xlrd
 pyqtgraph
 dnspython

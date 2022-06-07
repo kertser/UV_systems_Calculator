@@ -1394,6 +1394,7 @@ def FullTable():
     Ui.tableWidget.show()
 
 def FullRanged():
+    # Developer mode - full list of Reactor Systems
     config.FullRangeRED = True
     config.EPA = False
     #config.PMO = False
@@ -1429,6 +1430,7 @@ def FullRanged():
     recalculate()
 
 def EPA():
+    #
     config.FullRangeRED = False
     config.EPA = True
     #config.PMO = False
@@ -1465,6 +1467,7 @@ def EPA():
     recalculate()
 
 def PMO():
+    # Depricated function
     config.FullRangeRED = False
     config.EPA = False
     #config.PMO = True
