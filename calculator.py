@@ -246,6 +246,9 @@ class Ui(QtWidgets.QDialog):
             self.PlotRedFlow.setEnabled(True)
             self.PlotRedPower.setEnabled(True)
 
+            self.HgOF.setEnabled(True)
+            self.HgVUV.setEnabled(True)
+
             self.D1Log.setEnabled(True)
             self.Pathogens_Table.setEnabled(True)
 
@@ -1468,6 +1471,7 @@ def EPA():
 
 def PMO():
     # Depricated function
+    # TODO: Remove from the system
     config.FullRangeRED = False
     config.EPA = False
     #config.PMO = True
