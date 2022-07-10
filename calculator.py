@@ -163,6 +163,10 @@ class Ui(QtWidgets.QDialog):
         self.UVT215Label.setGraphicsEffect(self.ge1)
         self.ge1.setBlurRadius(5)
 
+        self.ge4 = QtWidgets.QGraphicsBlurEffect()
+        self.D1Log.setGraphicsEffect(self.ge4)
+        self.ge4.setBlurRadius(5)
+
         self.ge2 = QtWidgets.QGraphicsBlurEffect()
         self.UVT215.setGraphicsEffect(self.ge2)
         self.ge2.setBlurRadius(5)
@@ -256,6 +260,7 @@ class Ui(QtWidgets.QDialog):
             self.ge1.setEnabled(False)
             self.ge2.setEnabled(False)
             self.ge3.setEnabled(False)
+            self.ge4.setEnabled(False)
             
             # Enable EPA/PMO and Dechlorination in Developer version
             self.EPA.setEnabled(True)
@@ -1187,7 +1192,7 @@ def PlotREDvsDrive():
 def SelectFromTable():
     global ValidInput
 
-    if config.CalculatorType == 'Developer':
+    if config.CalculatorType == 'Developer' or 'Marketing':
 
         items = window.LogReductionTable.selectedItems()
         PatName = str(items[0].text())
@@ -1217,7 +1222,7 @@ def SelectFromTable():
 def SelectPathogen():
     global ValidInput
 
-    if config.CalculatorType == 'Developer':
+    if config.CalculatorType == 'Developer' or 'Marketing':
 
         getSelected = window.Pathogens.selectedItems()
         if getSelected:
@@ -1304,6 +1309,7 @@ def Developer():
                 window.ge1.setEnabled(False)
                 window.ge2.setEnabled(False)
                 window.ge3.setEnabled(False)
+                window.ge4.setEnabled(False)
                 
                 window.EPA.setEnabled(True)
                 #window.PMO.setEnabled(True)
@@ -1339,6 +1345,7 @@ def Marketing():
         window.ge1.setEnabled(True)
         window.ge2.setEnabled(True)
         window.ge3.setEnabled(True)
+        window.ge4.setEnabled(True)
 
         window.UVT215.setVisible(True)
         window.UVT215units.setVisible(True)
