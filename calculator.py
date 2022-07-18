@@ -1947,7 +1947,6 @@ def resetCalc(self):
     config.FlowUnits = 'm3h'
     window.FlowUnits.setCurrentIndex(0) #set to m3/h
 
-
     FlowUnits()
     recalculate()
 
