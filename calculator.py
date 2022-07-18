@@ -1947,14 +1947,13 @@ def resetCalc(self):
     config.FlowUnits = 'm3h'
     window.FlowUnits.setCurrentIndex(0) #set to m3/h
 
-
     FlowUnits()
     recalculate()
 
 if __name__ == '__main__':
 
     app = QtWidgets.QApplication(sys.argv)
-    f = QFont("Congenial", 8)
+    f = QFont("Tahoma", 8)
     app.setFont(f)
 
     login = Login() #Log-in dialog
