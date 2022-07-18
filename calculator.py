@@ -14,6 +14,7 @@ from re import findall
 from math import exp as exp
 from pymongo import MongoClient
 from datetime import datetime
+from PyQt5.QtGui import QFont
 
 # Global Variables Definition
 ValidInput = True # Defines whether the input values are valid
@@ -88,6 +89,7 @@ class Login(QtWidgets.QDialog):
 class Ui(QtWidgets.QDialog):
     def __init__(self):
         super(Ui, self).__init__()
+
         uic_path = resource_path("Calculator_UI.ui")
         uic.loadUi(uic_path, self)
 
@@ -1952,6 +1954,9 @@ def resetCalc(self):
 if __name__ == '__main__':
 
     app = QtWidgets.QApplication(sys.argv)
+    f = QFont("Congenial", 8)
+    app.setFont(f)
+
     login = Login() #Log-in dialog
 
     if login.exec_() == QtWidgets.QDialog.Accepted:
