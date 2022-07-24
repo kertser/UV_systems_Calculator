@@ -72,9 +72,9 @@
    <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
-      <x>790</x>
+      <x>720</x>
       <y>0</y>
-      <width>211</width>
+      <width>281</width>
       <height>41</height>
      </rect>
     </property>
@@ -2533,9 +2533,9 @@ p, li { white-space: pre-wrap; }
    <widget class="QLabel" name="label_3">
     <property name="geometry">
      <rect>
-      <x>790</x>
+      <x>750</x>
       <y>10</y>
-      <width>231</width>
+      <width>271</width>
       <height>20</height>
      </rect>
     </property>
@@ -2548,7 +2548,7 @@ p, li { white-space: pre-wrap; }
      <rect>
       <x>20</x>
       <y>10</y>
-      <width>61</width>
+      <width>91</width>
       <height>20</height>
      </rect>
     </property>

@@ -4,3 +4,14 @@ pymongo
 xlrd
 pyqtgraph
 dnspython
+openpyxl
+
+#  sudo apt-get install libx11-xcb1
+#  sudo apt install libxcb-icccm4 libxcb-image0 libxcb-keysyms1 libxcb-render-util0
+#  ldd /home/curiouspan/qt6-build/qtbase/plugins/platforms/libqxcb.so
+#  sudo apt-get install '^libxcb.*-dev' libx11-xcb-dev libglu1-mesa-dev libxrender-dev libxi-dev libxkbcommon-dev libxkbcommon-x11-dev
+
+# sudo apt install -y xpra
+
+# Shall be started from the specific user directory
+# xpra start --bind-tcp=0.0.0.0:9876 --html=on --start-on-connect='python3 /home/user/Projects/UV_systems_Calculator/calculator.py'
