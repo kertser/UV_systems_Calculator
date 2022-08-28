@@ -21,8 +21,8 @@ from statistics import mean as avg
 	5	
 4		6
 """
-Dose_VF = {'Regular': 1.3,
-           'Marine' : 1.7
+Dose_VF = {'Regular': 1.7,
+           'Marine' : 1.3
           }
 
 # C-flow [bar/(m^3/hour)^2]
