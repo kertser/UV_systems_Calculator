@@ -1,8 +1,8 @@
 #%%
 """
-Calculator - Version 11.11 (04.04.2022)
+Calculator - Version 11.16 (01.09.2022)
 Modifications:
-    - Added the hidden D1-Log in Marketing version
+    - Fixed some errors
 """
 from PyQt5 import uic, QtWidgets, QtCore
 from PyQt5.QtWidgets import QTableWidgetItem, QTableWidget
@@ -742,7 +742,7 @@ def recalculate():
             from RZM_350_5 import LampPower as LampPower
             from RZM_350_5 import Dose_VF as VF #Validation Factor
 
-        #from RZM_350 import minFlow as minFlow
+        #from RZM_350 import minFlow as minFlo
         #from RZM_350 import maxFlow as maxFlow
 
         #config.minFlow = minFlow
