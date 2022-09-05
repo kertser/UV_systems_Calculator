@@ -1,8 +1,8 @@
 #%%
 """
-Calculator - Version 11.16 (01.09.2022)
+Calculator - Version 11.17 (04.09.2022)
 Modifications:
-    - Fixed some errors
+    - Updated pressure convesrsion units
 """
 from PyQt5 import uic, QtWidgets, QtCore
 from PyQt5.QtWidgets import QTableWidgetItem, QTableWidget
@@ -1862,7 +1862,7 @@ def FlowUnits():
         window.FlowRate.setAlignment(QtCore.Qt.AlignCenter)
         recalculate()
 
-def PressureUnits():
+def PressureUnits(): # Converting from mH2O to units
     if (window.PressureUnits.currentText()=='[mH₂O]'):
         config.FlowUnits = 'mH2O'
         config.HL_Multiplier = 1
@@ -1871,16 +1871,13 @@ def PressureUnits():
         config.HL_Multiplier = 100
     if (window.PressureUnits.currentText()=='[inH₂O]'):
         config.FlowUnits = 'inH2O'
-        config.HL_Multiplier = 0.0254
-    if (window.PressureUnits.currentText()=='[inH₂O]'):
-        config.FlowUnits = 'bar'
-        config.HL_Multiplier = 0.098064
+        config.HL_Multiplier = 39.37
     if (window.PressureUnits.currentText()=='[PSI]'):
         config.FlowUnits = 'psi'
         config.HL_Multiplier = 1.42233
     if (window.PressureUnits.currentText()=='[bar]'):
         config.FlowUnits = 'bar'
-        config.HL_Multiplier = 10.1971621
+        config.HL_Multiplier = 0.0980665
     FlowUnits()
     recalculate()
 
