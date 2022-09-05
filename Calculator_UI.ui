@@ -90,7 +90,7 @@
      </font>
     </property>
     <property name="text">
-     <string>UV Dose Calculator v.11.16</string>
+     <string>UV Dose Calculator v.11.17</string>
     </property>
     <property name="textFormat">
      <enum>Qt::RichText</enum>
