@@ -7,6 +7,7 @@ Modifications:
 from PyQt5 import uic, QtWidgets, QtCore
 from PyQt5.QtWidgets import QTableWidgetItem, QTableWidget
 from PyQt5.QtWidgets import QTreeWidgetItem, QInputDialog
+from PyQt5.QtCore import QTimer
 import sys
 import os
 import config
@@ -89,6 +90,8 @@ class Login(QtWidgets.QDialog):
 class Ui(QtWidgets.QDialog):
     def __init__(self):
         super(Ui, self).__init__()
+        timeout = 10 #min
+        QtCore.QTimer.singleShot(timeout*60*1000, self.close)
 
         uic_path = resource_path("Calculator_UI.ui")
         uic.loadUi(uic_path, self)
