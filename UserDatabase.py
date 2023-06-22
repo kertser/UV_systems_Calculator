@@ -33,6 +33,7 @@ class Ui(QtWidgets.QDialog):
         try:
             #client = MongoClient("mongodb+srv://Mike:Atlantium@cluster0.xyexc.mongodb.net/<dbname>?retryWrites=true&w=majority")
             client = MongoClient("mongodb+srv://AtlantiumAdmin:AtlantiumDB@cluster0.xyexc.mongodb.net/<dbname>?retryWrites=true&w=majority")
+            #client = MongoClient("mongodb+srv:// AtlantiumAdmin:AtlantiumDB@cluster0.xyexc.mongodb.net/?retryWrites=true&w=majority")
             db = client.get_database('CalcUsers')
             records = db.Calculator            
             users = list(records.find({}))
