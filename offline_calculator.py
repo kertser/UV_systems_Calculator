@@ -1538,6 +1538,7 @@ def FullRanged():
 
     window.OzoneIn.setEnabled(False)
     window.ChlorineIn.setEnabled(False)
+    UVSystem()
     recalculate()
 
 
