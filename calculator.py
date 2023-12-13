@@ -1,8 +1,8 @@
 #%%
 """
-Calculator - Version 11.18 (04.09.2022)
+Calculator - Version 11.18 (13.12.2023)
 Modifications:
-    - Updated login timeout
+    - Added WW application
 """
 from PyQt5 import uic, QtWidgets, QtCore
 from PyQt5.QtWidgets import QTableWidgetItem, QTableWidget
@@ -390,6 +390,34 @@ def recalculate():
             window.RED.setText('0')
         window.RED.setAlignment(QtCore.Qt.AlignCenter)
         window.HeadLoss.setText(str(round(config.HL_Multiplier*HL(config.FlowRate_m3h/config.nBranches,config.NLamps),2)))
+        window.HeadLoss.setAlignment(QtCore.Qt.AlignCenter)
+
+        config.MaxLampsPower = LampPower * config.NLamps
+        config.AveragePowerConsumption = int(config.MaxLampsPower*(config.Drive/100)*0.9)
+        window.MaxLampsPower.setText(str(config.MaxLampsPower/1000))
+        window.MaxLampsPower.setAlignment(QtCore.Qt.AlignCenter)
+        window.AveragePowerConsumption.setText(str(config.AveragePowerConsumption/1000))
+        window.AveragePowerConsumption.setAlignment(QtCore.Qt.AlignCenter)
+
+    if window.UVSystem.currentText() == 'WW module':
+        ## Waste water module
+
+        from open_channel import RED as RED
+        from open_channel import WW6, WW11
+        from open_channel import Gate_Opening
+        from open_channel import LampPower as LampPower
+
+        # Calculate RED and HeadLoss
+        window.RED.setText(str(round(config.LampFactor*RED(config.Drive,config.LampEfficiency,config.FlowRate_m3h/config.nBranches,
+                                   config.UVT,config.D1Log,config.NLamps),1)))
+        if (float(window.RED.toPlainText())<0):
+            window.RED.setText('0')
+        window.RED.setAlignment(QtCore.Qt.AlignCenter)
+        if config.NLamps == 11:
+            window.HeadLoss.setText(str(round(config.HL_Multiplier * WW11.HeadLoss(config.FlowRate_m3h/config.nBranches),2)))
+        elif config.NLamps == 6:
+            window.HeadLoss.setText(str(round(config.HL_Multiplier * WW6.HeadLoss(config.FlowRate_m3h / config.nBranches), 2)))
+
         window.HeadLoss.setAlignment(QtCore.Qt.AlignCenter)
 
         config.MaxLampsPower = LampPower * config.NLamps
