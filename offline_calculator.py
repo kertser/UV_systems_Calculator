@@ -17,6 +17,10 @@ from pymongo import MongoClient
 from datetime import datetime
 from PyQt5.QtGui import QFont
 
+# Get spash screen - offline version only
+if getattr(sys, 'frozen', False):
+    import pyi_splash
+
 # Global Variables Definition
 ValidInput = True  # Defines whether the input values are valid
 
@@ -2076,6 +2080,10 @@ def resetCalc(self):
     recalculate()
 
 if __name__ == '__main__':
+
+    # Close the splashscreen
+    if getattr(sys, 'frozen', False):
+        pyi_splash.close()
 
     app = QtWidgets.QApplication(sys.argv)
     f = QFont("Tahoma", 8)
