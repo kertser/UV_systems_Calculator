@@ -14,4 +14,8 @@ pyqtgraph
 pymongo
 dnspython
 
+pyOpenGL
 opepyxl
+
+Possibly for compiler:
+hiddenimports=['OpenGL']
