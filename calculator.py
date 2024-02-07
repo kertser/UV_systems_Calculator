@@ -1629,10 +1629,10 @@ def UVModel():
         config.minFlow = 1 #This is an absolute minimum
     else:
         if window.vertical.isChecked():
-            config.minFlow = (round(float(params['Qmin vertical [m^3/h]']),0)) # Vertical
+            config.minFlow = (round(float(params['Qmin vertical [m^3/h]'].iloc[0]),0)) # Vertical
         else:
-            config.minFlow = (round(float(params['Qmin [m^3/h]']),0)) # Horizontal
-    config.maxFlow = (round(float(params['Qmax [m^3/h]']),0))
+            config.minFlow = (round(float(params['Qmin [m^3/h]'].iloc[0]),0)) # Horizontal
+    config.maxFlow = (round(float(params['Qmax [m^3/h]'].iloc[0]),0))
 
     #Beanches flow dividers
     config.minFlow = config.minFlow*config.nBranches
@@ -1642,10 +1642,10 @@ def UVModel():
     config.FlowRate_m3h = config.FlowRate_m3h*config.nBranches
     config.FlowRate_USgpm = config.FlowRate_m3h*config.m3h2gpm
 
-    config.minUVT = float(params['UVTmin [%-1cm]'])
-    config.maxUVT = float(params['UVTmax [%-1cm]'])
-    config.minPower = float(params['Pmin [%]'])
-    config.maxPower = float(params['Pmax [%]'])
+    config.minUVT = float(params['UVTmin [%-1cm]'].iloc[0])
+    config.maxUVT = float(params['UVTmax [%-1cm]'].iloc[0])
+    config.minPower = float(params['Pmin [%]'].iloc[0])
+    config.maxPower = float(params['Pmax [%]'].iloc[0])
 
     #Reset the sliders and values:
     #Reset Power
@@ -1823,9 +1823,9 @@ def FlowRate():
 
         params = config.SystemParameters.loc[(config.SystemParameters['UV-System']==window.UVSystem.currentText()) & (config.SystemParameters['Model']==window.UVModel.currentText())]
         if window.vertical.isChecked():
-            TempMinFlow = (round(float(params['Qmin vertical [m^3/h]']),0)) # Vertical
+            TempMinFlow = (round(float(params['Qmin vertical [m^3/h]'].iloc[0]),0)) # Vertical
         else:
-            TempMinFlow = (round(float(params['Qmin [m^3/h]']),0)) # Horizontal
+            TempMinFlow = (round(float(params['Qmin [m^3/h]'].iloc[0]),0)) # Horizontal
         if  config.FlowRate_m3h<TempMinFlow:
             window.FlowRate.setStyleSheet("background-color: rgb(255, 0, 0);")
             window.RED.setStyleSheet("background-color: rgb(255, 0, 0);")
