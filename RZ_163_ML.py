@@ -87,8 +87,6 @@ def RED(P1, P2, P3, P4, Eff1, Eff2, Eff3, Eff4, Flow, UVT, D1Log,
     else:
         L_eff = (L_eff_scale / alfa)
 
-    # NLF = NL0+NL1*P+NL2*P**2
-
     TAD = (1 / Unit_converter_1) * Eta_UV * PQR * L_eff  # [mJ/cm^2]
 
     q_step = TUF0 + TUF1 * UVT_step + TUF2 * UVT_step ** 2
