@@ -76,8 +76,6 @@ def RED(P1, P2, P3, P4, Eff1, Eff2, Eff3, Eff4, Flow, UVT, D1Log,
     Eta_UV = eta_g * eta_coupling * (Eff1 / 100) * NLF
     PQR = LampPower * (P/100) / Flow
 
-    print(PQR)
-
     L_eff_step = L_eff_coeff_0 + L_eff_coeff_1 * UVT_step + L_eff_coeff_2 * UVT_step ** 2 + L_eff_coeff_3 * UVT_step ** 3 + L_eff_coeff_4 * UVT_step ** 4
     alfa_step = -ln(UVT_step / 100)
     alfa = -ln(UVT / 100)
@@ -87,8 +85,6 @@ def RED(P1, P2, P3, P4, Eff1, Eff2, Eff3, Eff4, Flow, UVT, D1Log,
         L_eff = L_eff_coeff_0 + L_eff_coeff_1 * UVT + L_eff_coeff_2 * UVT ** 2 + L_eff_coeff_3 * UVT ** 3 + L_eff_coeff_4 * UVT ** 4
     else:
         L_eff = (L_eff_scale / alfa)
-
-    # NLF = NL0+NL1*P+NL2*P**2
 
     TAD = (1 / Unit_converter_1) * Eta_UV * PQR * L_eff  # [mJ/cm^2]
 

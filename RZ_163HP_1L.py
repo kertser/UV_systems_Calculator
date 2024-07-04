@@ -78,7 +78,6 @@ def RED(P1,P2,P3,P4,Eff1,Eff2,Eff3,Eff4,Flow,UVT,D1Log,NLamps): #Here we shall m
     Eta_UV = eta_g*eta_coupling*(Eff1/100)*NLF
 
     PQR = LampPower * (P / 100) / Flow
-    # PQR = LampPower/Flow
 
     L_eff_step = L_eff_coeff_0+L_eff_coeff_1*UVT_step+L_eff_coeff_2*UVT_step**2+L_eff_coeff_3*UVT_step**3+L_eff_coeff_4*UVT_step**4
     alfa_step =-ln(UVT_step/100)
