@@ -1,0 +1,117 @@
+
+# MongoDB Installation and Configuration on Ubuntu
+
+## Step 1: Install MongoDB on Ubuntu
+
+1. **Import the MongoDB GPG key**:
+   ```sh
+   wget -qO- https://pgp.mongodb.com/server-6.0.asc | gpg --dearmor | sudo tee /usr/share/keyrings/mongodb-server-6.0.gpg
+   ```
+
+2. **Create a list file for MongoDB**:
+   ```sh
+   echo "deb [ arch=amd64,arm64 signed-by=/usr/share/keyrings/mongodb-server-6.0.gpg ] https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/6.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-6.0.list
+   ```
+
+3. **Update the package list**:
+   ```sh
+   sudo apt update
+   ```
+
+4. **Install MongoDB**:
+   ```sh
+   sudo apt install -y mongodb-org
+   ```
+
+5. **Start and enable MongoDB**:
+   ```sh
+   sudo systemctl start mongod
+   sudo systemctl enable mongod
+   ```
+
+## Step 2: Create Admin User
+
+1. **Connect to MongoDB shell**:
+   ```sh
+   mongosh
+   ```
+
+2. **Switch to the `admin` database**:
+   ```javascript
+   use admin
+   ```
+
+3. **Create the admin user**:
+   ```javascript
+   db.createUser({
+     user: "admin",
+     pwd: "atlantium",
+     roles: [ { role: "root", db: "admin" } ]
+   })
+   ```
+
+4. **Enable authentication**:
+   Edit the MongoDB configuration file:
+   ```sh
+   sudo nano /etc/mongod.conf
+   ```
+   Add the following lines under the `security` section:
+   ```yaml
+   security:
+     authorization: enabled
+   ```
+   Restart MongoDB:
+   ```sh
+   sudo systemctl restart mongod
+   ```
+
+## Step 3: Create Database and Users
+
+1. **Connect to MongoDB shell with admin user**:
+   ```sh
+   mongosh -u admin -p --authenticationDatabase admin
+   ```
+
+2. **Create the `CalcUsers` database**:
+   ```javascript
+   use CalcUsers
+   ```
+
+3. **Create a user with read and write access**:
+   ```javascript
+   db.createUser({
+     user: "calcUserRW",
+     pwd: "atlantium",
+     roles: [ { role: "readWrite", db: "CalcUsers" } ]
+   })
+   ```
+
+4. **Create a user with read-only access**:
+   ```javascript
+   db.createUser({
+     user: "readonlyUser",
+     pwd: "user",
+     roles: [ { role: "read", db: "CalcUsers" } ]
+   })
+   ```
+
+## Optional: Dump and Restore Database Locally
+
+1. **Dump the database**:
+   ```sh
+   mongodump --uri "mongodb+srv://CalcUser:CalcUser@cluster0.xyexc.mongodb.net/CalcUsers"
+   ```
+
+2. **Restore the database**:
+   ```sh
+   mongorestore --uri="mongodb://admin:atlantium@localhost:27017/CalcUsers?authSource=admin" --drop dump/CalcUsers
+   ```
+
+## Summary
+
+- **Install MongoDB** on your Ubuntu system.
+- **Create an admin user** with full access.
+- **Create the `CalcUsers` database** and add users with specific roles:
+  - A user with read and write access.
+  - A user with read-only access.
+- **Optionally, dump and restore** the database to migrate data or create backups.
