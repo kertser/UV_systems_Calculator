@@ -55,7 +55,8 @@ class Login(QtWidgets.QDialog):
     def handleLogin(self):
         #Connect to Atlantium MongoDB with usernames
         #client = MongoClient("mongodb+srv://Mike:Atlantium@cluster0.xyexc.mongodb.net/<dbname>?retryWrites=true&w=majority")
-        client = MongoClient("mongodb+srv://CalcUser:CalcUser@cluster0.xyexc.mongodb.net/<dbname>?retryWrites=true&w=majority")
+        #client = MongoClient("mongodb+srv://CalcUser:CalcUser@cluster0.xyexc.mongodb.net/<dbname>?retryWrites=true&w=majority")
+        client = MongoClient("mongodb://calcUserRW:atlantium@localhost:27017/CalcUsers?authSource=CalcUsers")
         db = client.get_database('CalcUsers')
         records = db.Calculator
 
