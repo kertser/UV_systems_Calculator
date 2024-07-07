@@ -31,8 +31,8 @@ class Ui(QtWidgets.QDialog):
 
     def refreshList(self):
         try:
-            client = MongoClient("mongodb+srv://AtlantiumAdmin:AtlantiumDB@cluster0.xyexc.mongodb.net/<dbname>?retryWrites=true&w=majority")
-            #client = MongoClient("mongodb://admin:atlantium@212.235.125.206:27017/CalcUsers?authSource=CalcUsers") # new remote admin
+            #client = MongoClient("mongodb+srv://AtlantiumAdmin:AtlantiumDB@cluster0.xyexc.mongodb.net/<dbname>?retryWrites=true&w=majority")
+            client = MongoClient("mongodb://admin:atlantium@212.235.125.206:27017/admin?authSource=admin") # new remote admin
             db = client.get_database('CalcUsers')
             records = db.Calculator            
             users = list(records.find({}))
@@ -93,8 +93,8 @@ class addUserDialog(QtWidgets.QDialog):
         self.close()
         
     def handleUser(self, event):
-        client = MongoClient("mongodb+srv://Mike:Atlantium@cluster0.xyexc.mongodb.net/<dbname>?retryWrites=true&w=majority")
-        #client = MongoClient("mongodb://admin:atlantium@212.235.125.206:27017/CalcUsers?authSource=CalcUsers") # new remote admin
+        #client = MongoClient("mongodb+srv://Mike:Atlantium@cluster0.xyexc.mongodb.net/<dbname>?retryWrites=true&w=majority")
+        client = MongoClient("mongodb://admin:atlantium@212.235.125.206:27017/admin?authSource=admin") # new remote admin
         db = client.get_database('CalcUsers')
         collection = db.Calculator
         
@@ -160,8 +160,8 @@ class changeUserData(QtWidgets.QDialog):
         self.close()
         
     def handleUser(self, event):        
-        client = MongoClient("mongodb+srv://Mike:Atlantium@cluster0.xyexc.mongodb.net/<dbname>?retryWrites=true&w=majority")
-        #client = MongoClient("mongodb://admin:atlantium@212.235.125.206:27017/CalcUsers?authSource=CalcUsers") # new remote admin
+        #client = MongoClient("mongodb+srv://Mike:Atlantium@cluster0.xyexc.mongodb.net/<dbname>?retryWrites=true&w=majority")
+        client = MongoClient("mongodb://admin:atlantium@212.235.125.206:27017/admin?authSource=admin") # new remote admin
         db = client.get_database('CalcUsers')
         collection = db.Calculator        
         
@@ -201,8 +201,8 @@ def removeUserDialog(self):
    
    returnValue = msgBox.exec()
    if returnValue == QMessageBox.Yes:
-       client = MongoClient("mongodb+srv://Mike:Atlantium@cluster0.xyexc.mongodb.net/<dbname>?retryWrites=true&w=majority")
-       #client = MongoClient("mongodb://admin:atlantium@212.235.125.206:27017/CalcUsers?authSource=CalcUsers") # new remote admin
+       #client = MongoClient("mongodb+srv://Mike:Atlantium@cluster0.xyexc.mongodb.net/<dbname>?retryWrites=true&w=majority")
+       client = MongoClient("mongodb://admin:atlantium@212.235.125.206:27017/admin?authSource=admin") # new remote admin
        db = client.get_database('CalcUsers')
        collection = db.Calculator
        
