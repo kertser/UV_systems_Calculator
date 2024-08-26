@@ -90,7 +90,7 @@
      </font>
     </property>
     <property name="text">
-     <string>UV Dose Calculator v.11.18</string>
+     <string>UV Dose Calculator v.11.20</string>
     </property>
     <property name="textFormat">
      <enum>Qt::RichText</enum>
@@ -2540,7 +2540,7 @@ p, li { white-space: pre-wrap; }
      </rect>
     </property>
     <property name="text">
-     <string>Copyright: Atlantium Technologies 2020-2023</string>
+     <string>Copyright: Atlantium Technologies 2020-2024</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_4">
