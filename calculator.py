@@ -56,7 +56,8 @@ class Login(QtWidgets.QDialog):
         #Connect to Atlantium MongoDB with usernames
         #client = MongoClient("mongodb+srv://CalcUser:CalcUser@cluster0.xyexc.mongodb.net/<dbname>?retryWrites=true&w=majority")
         #client = MongoClient("mongodb://calcUserRW:Atlantium@localhost:27017/CalcUsers?authSource=CalcUsers") # local
-        client = MongoClient("mongodb://calcUserRW:Atlantium@212.235.125.206:27017/CalcUsers?authSource=CalcUsers") # remote - need to open the port on server
+        # client = MongoClient("mongodb://calcUserRW:Atlantium@212.235.125.206:27017/CalcUsers?authSource=CalcUsers") # remote - need to open the port on server
+        client = MongoClient("mongodb://calcUserRW:Atlantium@83.229.70.50:27017/CalcUsers?authSource=CalcUsers")  # remote - cloud
         db = client.get_database('CalcUsers')
         records = db.Calculator
 
