@@ -15,3 +15,33 @@ openpyxl
 
 # Start XPRA server with venv activated in /UV_systems_Calculator
 # Start with nohup xpra start --bind-tcp=0.0.0.0:9876 --html=on --no-mdns --no-pulseaudio --no-microphone --no-speaker --no-webcam --no-tray --encoding=rgb --start-on-connect='python3 calculator.py' &
+
+# Alternative:
+# mkdir -p ~/.config/systemd/user
+# nano ~/.config/systemd/user/xpra.service
+
+"""
+[Unit]
+Description=Xpra Remote Display Server
+After=network.target
+
+[Service]
+WorkingDirectory=/home/user/UV_systems_Calculator
+ExecStart=/usr/bin/xpra start --bind-tcp=0.0.0.0:9876 --html=on --no-mdns --no-pulseaudio --no-microphone --no-speaker --no-webcam --no-tray --encoding=rgb --start-on-connect="bash -c 'source venv/bin/activate && python3 calculator.py'"
+Restart=always
+RestartSec=5s
+Environment="DISPLAY=:100"
+Environment="XDG_RUNTIME_DIR=/run/user/%U"
+Environment="HOME=/home/user"
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=default.target
+"""
+
+# systemctl --user daemon-reload
+# systemctl --user enable xpra
+# systemctl --user start xpra
+
+# sudo loginctl enable-linger $USER
