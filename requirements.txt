@@ -13,5 +13,5 @@ openpyxl
 
 # sudo apt install -y xpra
 
-# Shall be started from the specific user directory
-# xpra start --bind-tcp=0.0.0.0:9876 --html=on --start-on-connect='python3 /home/user/Projects/UV_systems_Calculator/calculator.py'
+# Start XPRA server with venv activated in /UV_systems_Calculator
+# Start with nohup xpra start --bind-tcp=0.0.0.0:9876 --html=on --no-mdns --no-pulseaudio --no-microphone --no-speaker --no-webcam --no-tray --encoding=rgb --start-on-connect='python3 calculator.py' &
